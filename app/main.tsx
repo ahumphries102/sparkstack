@@ -107,12 +107,16 @@ export default function SparkStack() {
               style={{ fontFamily: '"Space Grotesk", sans-serif' }}
             >
               <span className="bg-gradient-to-r from-cyan-400 via-violet-400 to-pink-400 bg-clip-text text-transparent">
-                Build Better.
+                Spark Stack
               </span>
-              <br />
-              <span className="text-zinc-100">Ship Faster.</span>
             </h1>
-
+            <h3
+              className="text-5xl md:text-5xl font-black mb-6 leading-tight
+                         animate-[fadeIn_0.8s_ease-out_0.2s_backwards]"
+              style={{ fontFamily: '"Space Grotesk", sans-serif' }}
+            >
+              Build Better. <span className="text-zinc-100">Ship Faster.</span>
+            </h3>
             <p
               className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-3xl mx-auto
                         animate-[fadeIn_1s_ease-out_0.4s_backwards]"
