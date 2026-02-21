@@ -6,8 +6,9 @@
   width: 100%;
   background-color: red;
   overflow: hidden;
-  transition: height 0.5s;
+  transition: height .5s ease-in-out;
+  
 }
 .taco.show {
-    height: calc(100vh);
+    height: calc(45px);
 }

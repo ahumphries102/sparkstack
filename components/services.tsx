@@ -15,12 +15,7 @@ export default function Services({}) {
   const openModal = (componentName: string) => {
       setCurrentComponent(componentName)
       setIsModalOpen(!isModalOpen)
-
-      if (isModalOpen === true) {
-        setTimeout(() => {
-          setIsModalOpen(true)
-        }, 500)
-      }
+      console.log('hal')
   }
 
   return (
@@ -101,8 +96,8 @@ export default function Services({}) {
               </button>
             </div>
           ))}
-          <div className={isModalOpen ? "taco show" : "taco"} >
-            {isModalOpen && <ServiceComponent isOpen={isModalOpen} />}
+          <div className={isModalOpen ? "taco show" : "taco"} onTransitionEnd={() => setIsModalOpen(true)}>
+            {isModalOpen && <ServiceComponent isOpen={isModalOpen}/>}
           </div>
         </div>
       </div>
