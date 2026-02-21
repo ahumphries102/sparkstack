@@ -1,6 +1,28 @@
-import { serviceData } from "../serviceData"
+import { useState } from "react"
+import { serviceData } from "@/app/data/serviceData"
+import dynamic from "next/dynamic"
 
-export default function services({}) {
+export default function Services({}) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [currentComponent, setCurrentComponent] = useState<string>("")
+  const ServiceComponent = dynamic(
+    () => import(`@/components/services/${currentComponent}`),
+    {
+      ssr: false,
+    },
+  )
+
+  const openModal = (componentName: string) => {
+      setCurrentComponent(componentName)
+      setIsModalOpen(!isModalOpen)
+
+      if (isModalOpen === true) {
+        setTimeout(() => {
+          setIsModalOpen(true)
+        }, 500)
+      }
+  }
+
   return (
     <section id="services" className="relative py-32 px-6">
       <div className="max-w-7xl mx-auto">
@@ -25,15 +47,15 @@ export default function services({}) {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {serviceData.map((service, index) => (
+          {serviceData.map((service) => (
             <div
               key={service.title}
               className="group relative bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8
                            hover:border-zinc-700 transition-all duration-300 hover:transform hover:scale-105"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Gradient Overlay */}
               <div
+                onClick={() => openModal(service.route)}
                 className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 
                                 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`}
               />
@@ -71,10 +93,6 @@ export default function services({}) {
 
               {/* CTA */}
               <button
-                onClick={() => {
-                  const element = document.getElementById("contact")
-                  if (element) element.scrollIntoView({ behavior: "smooth" })
-                }}
                 className="w-full py-3 bg-zinc-800 rounded-lg font-semibold
                                    hover:bg-zinc-700 transition-all group-hover:bg-gradient-to-r 
                                    group-hover:from-zinc-700 group-hover:to-zinc-800"
@@ -83,6 +101,9 @@ export default function services({}) {
               </button>
             </div>
           ))}
+          <div className={isModalOpen ? "taco show" : "taco"} >
+            {isModalOpen && <ServiceComponent isOpen={isModalOpen} />}
+          </div>
         </div>
       </div>
     </section>

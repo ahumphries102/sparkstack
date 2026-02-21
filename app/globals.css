@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+/* Create a class to apply the animation */
+.taco {
+    height: 0px;
+  width: 100%;
+  background-color: red;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+.taco.show {
+    height: calc(100vh);
 }

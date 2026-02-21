@@ -2,6 +2,7 @@ import { Camera, Code, Zap, Coffee } from "lucide-react"
 export const serviceData = [
     {
       title: "Front-End",
+      route: "frontendService",
       icon: <Camera className="w-8 h-8" />,
       description: "Beautiful, responsive interfaces that users love",
       features: [
@@ -16,6 +17,7 @@ export const serviceData = [
     },
     {
       title: "Back-End",
+      route: "backendService",
       icon: <Code className="w-8 h-8" />,
       description: "Robust server-side solutions for your applications",
       features: [
@@ -30,6 +32,7 @@ export const serviceData = [
     },
     {
       title: "Full-Stack",
+      route: "fullstackService",
       icon: <Zap className="w-8 h-8" />,
       description: "Complete end-to-end web application development",
       features: [
@@ -44,6 +47,7 @@ export const serviceData = [
     },
     {
       title: "Web Development",
+      route: "webdevelopmentService",
       icon: <Coffee className="w-8 h-8" />,
       description: "Custom solutions for your unique business needs",
       features: [
