@@ -2,13 +2,13 @@
 
 /* Create a class to apply the animation */
 .taco {
-    height: 0px;
-  width: 100%;
+  grid-template-rows: 0fr;
+
   background-color: red;
   overflow: hidden;
   transition: height .5s ease-in-out;
   
 }
 .taco.show {
-    height: calc(45px);
+    grid-template-rows: 1fr;
 }
