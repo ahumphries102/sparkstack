@@ -1,14 +1,2 @@
 @import "tailwindcss";
-
-/* Create a class to apply the animation */
-.taco {
-  grid-template-rows: 0fr;
-
-  background-color: red;
-  overflow: hidden;
-  transition: height .5s ease-in-out;
-  
-}
-.taco.show {
-    grid-template-rows: 1fr;
-}
+@plugin "daisyui";
