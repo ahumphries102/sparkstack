@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
 import { Coffee, Check, ArrowRight, Globe, ShoppingCart, FileText, Palette, Search, BarChart, LucideIcon } from 'lucide-react';
-
-type TabType = 'overview' | 'services' | 'process' | 'technologies';
 
 interface FeatureCard {
   icon: LucideIcon;
@@ -39,8 +36,7 @@ interface TechnologyExplanation {
   description: string;
 }
 
-const WebDevelopmentDetailPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
+export default function WebDevelopmentDetailPage({activeTab}: {activeTab: string}) {
 
   const featureCards: FeatureCard[] = [
     {
@@ -229,16 +225,9 @@ const WebDevelopmentDetailPage: React.FC = () => {
     }
   ];
 
-  const tabs: Array<{ id: TabType; label: string }> = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'services', label: 'Services' },
-    { id: 'process', label: 'Process' },
-    { id: 'technologies', label: 'Technologies' }
-  ];
-
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="min-w-7xl max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
@@ -254,22 +243,6 @@ const WebDevelopmentDetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 rounded-xl font-semibold capitalize whitespace-nowrap transition-all
-                ${activeTab === tab.id 
-                  ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white' 
-                  : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
-                }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
 
         {/* Overview Tab */}
         {activeTab === 'overview' && (
@@ -443,5 +416,3 @@ const WebDevelopmentDetailPage: React.FC = () => {
     </div>
   );
 };
-
-export default WebDevelopmentDetailPage;

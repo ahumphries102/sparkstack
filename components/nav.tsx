@@ -22,15 +22,16 @@ export default function Navigation() {
 
         <div className="hidden md:flex gap-8">
           {["About", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`/#${item.toLowerCase()}`}
-              className="text-sm uppercase tracking-wider hover:text-cyan-400 transition-colors"
-            >
-              {item}
-            </a>
+            <span key={item}>
+              <a
+                href={`/#${item.toLowerCase()}`}
+                className="text-sm uppercase tracking-wider hover:text-cyan-400 transition-colors"
+              >
+                {item}
+              </a>
+            </span>
           ))}
-          <div className="dropdown dropdown-hover">
+          <span className="dropdown dropdown-hover">
             <Link
               href="/#services"
               tabIndex={0}
@@ -51,7 +52,7 @@ export default function Navigation() {
                 </li>
               ))}
             </ul>
-          </div>
+          </span>
         </div>
       </div>
     </nav>

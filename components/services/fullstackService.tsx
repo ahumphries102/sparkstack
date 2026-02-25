@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
 import { Zap, Check, ArrowRight, Layers, Rocket, Users, Workflow, Shield, TrendingUp, LucideIcon } from 'lucide-react';
-
-type TabType = 'overview' | 'services' | 'process' | 'technologies';
-
 interface FeatureCard {
   icon: LucideIcon;
   title: string;
@@ -39,8 +35,7 @@ interface TechnologyExplanation {
   description: string;
 }
 
-const FullStackDetailPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
+export default function FullStackDetailPage({activeTab}: {activeTab: string}) {
 
   const featureCards: FeatureCard[] = [
     {
@@ -234,16 +229,9 @@ const FullStackDetailPage: React.FC = () => {
     }
   ];
 
-  const tabs: Array<{ id: TabType; label: string }> = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'services', label: 'Services' },
-    { id: 'process', label: 'Process' },
-    { id: 'technologies', label: 'Technologies' }
-  ];
-
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="min-w-7xl max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
@@ -257,23 +245,6 @@ const FullStackDetailPage: React.FC = () => {
               <p className="text-xl text-zinc-400">Complete end-to-end web application development</p>
             </div>
           </div>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="flex gap-4 mb-12 overflow-x-auto pb-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 rounded-xl font-semibold capitalize whitespace-nowrap transition-all
-                ${activeTab === tab.id 
-                  ? 'bg-gradient-to-r from-pink-400 to-rose-500 text-white' 
-                  : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
-                }`}
-            >
-              {tab.label}
-            </button>
-          ))}
         </div>
 
         {/* Overview Tab */}
@@ -448,5 +419,3 @@ const FullStackDetailPage: React.FC = () => {
     </div>
   );
 };
-
-export default FullStackDetailPage;
