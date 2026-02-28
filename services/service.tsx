@@ -9,7 +9,6 @@ export default function FrontEndDetailPage({
   selectedService: FeatureCard
 }) {
   const serviceConfig = featureCards[selectedService]
-  console.log(selectedService, serviceConfig)
   return (
     <div className={`min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6`}>
       <div className="min-w-7xl max-w-7xl mx-auto">
