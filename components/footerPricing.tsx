@@ -1,15 +1,15 @@
-import { LucideIcon } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
+import { FeatureCard } from "@/app/interfaces/services"
 export default function PricingFooter({
-  ArrowRight,
-  SelectedService,
+  selectedService,
 }: {
-  ArrowRight: LucideIcon
-  SelectedService: string
+  selectedService: FeatureCard
 }) {
+  const serviceConfig = featureCards[selectedService]
   return (
     <footer
-      className={`mt-16 bg-gradient-to-br ${featureCards[SelectedService]?.footerPricing.color} rounded-2xl p-8 md:p-12 text-center`}
+      className={`mt-16 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl p-8 md:p-12 text-center`}
     >
       <h2 className="text-4xl font-black mb-4 text-zinc-950">
         Ready to Get Started?
@@ -28,7 +28,11 @@ export default function PricingFooter({
         </button>
       </div>
       <div className="mt-8 text-zinc-900">
-        <p className="text-lg font-semibold">{featureCards[SelectedService]?.footerPricing.pricing.startingPrice || "N/A"} / Starting Price</p>
+        <p className="text-lg font-semibold">
+          {serviceConfig.footerPricing.pricing.startingPrice || "N/A"}{" "}
+          {serviceConfig.footerPricing.pricing.description || "N/A"} / Starting
+          Price
+        </p>
         <p className="text-sm">Complex projects quoted individually</p>
       </div>
     </footer>

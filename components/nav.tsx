@@ -21,38 +21,16 @@ export default function Navigation() {
         </Link>
 
         <div className="hidden md:flex gap-8">
-          {["About", "Contact"].map((item) => (
+          {["About", "Contact", "Services"].map((item) => (
             <span key={item}>
-              <a
+              <Link
                 href={`/#${item.toLowerCase()}`}
                 className="text-sm uppercase tracking-wider hover:text-cyan-400 transition-colors"
               >
                 {item}
-              </a>
+              </Link>
             </span>
           ))}
-          <span className="dropdown dropdown-hover">
-            <Link
-              href="/#services"
-              tabIndex={0}
-              role="button"
-              className="text-sm uppercase tracking-wider hover:text-cyan-400 transition-colors"
-            >
-              Services
-            </Link>
-            <ul
-              tabIndex="-1"
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-            >
-              {services.map((service) => (
-                <li key={service.name}>
-                  <Link href={service.href} className="text-sm">
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </span>
         </div>
       </div>
     </nav>

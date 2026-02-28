@@ -28,9 +28,7 @@ import { FeatureCard } from "@/interfaces/services"
 
 export const serviceData = [
   {
-    title: "Front-End",
-    route: "frontend",
-    icon: <Camera className="w-8 h-8" />,
+    color: "from-cyan-400 to-blue-500",
     description: "Beautiful, responsive interfaces that users love",
     features: [
       "Modern UI/UX Design",
@@ -40,7 +38,11 @@ export const serviceData = [
       "Cross-browser Compatible",
       "Accessibility Standards",
     ],
-    color: "from-cyan-400 to-blue-500",
+    icon: <Camera className="w-8 h-8" />,
+
+    route: "frontend",
+
+    title: "Front-End",
   },
   {
     title: "Back-End",
@@ -74,7 +76,6 @@ export const serviceData = [
   },
   {
     title: "Web Development",
-    route: "webdevelopment",
     icon: <Coffee className="w-8 h-8" />,
     description: "Custom solutions for your unique business needs",
     features: [
@@ -85,6 +86,8 @@ export const serviceData = [
       "SEO Optimization",
       "Analytics Integration",
     ],
+    path: { id: "webdevelopment", label: "4. webdevelopment" },
+    route: "webdevelopment",
     color: "from-amber-400 to-orange-500",
   },
 ]
@@ -143,6 +146,13 @@ export const featureCards: FeatureCard = {
         description: "for simple sites",
       },
     },
+    hero: {
+      title: "Front-End Development",
+      subtitle: "Beautiful, responsive interfaces that users love",
+      // Note: You can map the actual Lucide component in your master file using this string or a component map
+      icon: "Camera",
+    },
+    icon: Camera,
     includedServices: [
       "Modern UI/UX Design Implementation",
       "Responsive Layouts (Mobile, Tablet, Desktop)",
@@ -218,6 +228,14 @@ export const featureCards: FeatureCard = {
         ],
       },
     ],
+    overview: {
+      heading: "Transform Your Vision Into Reality",
+      paragraphs: [
+        "In today's digital-first world, your website or application is often the first impression customers have of your brand. I specialize in creating stunning, high-performance front-end experiences that don't just look beautiful—they convert visitors into customers and keep users engaged.",
+        "Using cutting-edge frameworks like React and Vue, combined with modern CSS techniques and performance optimization strategies, I build interfaces that are lightning-fast, intuitive to use, and accessible to everyone. Every pixel is crafted with intention, every interaction designed to delight, and every line of code written with maintainability in mind.",
+        "Whether you're launching a new product, redesigning an existing platform, or building a complex web application, I bring 8+ years of experience and a passion for creating exceptional digital experiences that users love and businesses depend on. ",
+      ],
+    },
     service: "frontend",
     technologyCategories: [
       {
@@ -311,6 +329,15 @@ export const featureCards: FeatureCard = {
           "Vite and modern bundlers provide lightning-fast development experience with hot module replacement, optimized production builds, and minimal configuration required.",
       },
     ],
+    theme: {
+      gradient: "from-cyan-400 to-blue-500",
+      textPrimary: "text-cyan-400",
+      bgPrimary: "bg-cyan-400",
+      iconBg: "bg-cyan-400/10",
+      hoverBorder: "hover:border-cyan-400/50",
+      pillBg: "bg-cyan-400/10",
+      pillBorder: "border-cyan-400/20",
+    },
     timelineItems: [
       {
         duration: "2-4",
@@ -417,6 +444,12 @@ export const featureCards: FeatureCard = {
         description: "for simple sites",
       },
     },
+    hero: {
+      title: "Back-End Development",
+      subtitle: "Robust server-side solutions for your applications",
+      icon: "Code",
+    },
+    icon: Code,
     includedServices: [
       "RESTful API Design & Development",
       "GraphQL API Implementation",
@@ -435,6 +468,14 @@ export const featureCards: FeatureCard = {
       "Database Migrations & Seeding",
       "Unit & Integration Testing",
     ],
+    overview: {
+      heading: "The Engine That Powers Everything",
+      paragraphs: [
+        "Your back-end is the invisible engine that makes everything work. It needs to be fast, secure, reliable, and built to scale as your business grows. A poorly designed back-end leads to slow performance, security vulnerabilities, and technical debt that becomes expensive to fix.",
+        "I architect and develop server-side solutions using Node.js and modern best practices, ensuring your data is protected, your APIs are performant, and your infrastructure can handle whatever comes its way. From authentication systems to complex business logic, payment processing to real-time features—I build production-ready code that's maintainable and well-documented.",
+        "Whether you're building a simple API or a complex microservices architecture, I bring 8+ years of experience in designing scalable systems that handle millions of requests, protect sensitive data, and provide the solid foundation your application needs to succeed.",
+      ],
+    },
     processSteps: [
       {
         number: "01",
@@ -574,6 +615,15 @@ export const featureCards: FeatureCard = {
           "Containerization ensures consistency across environments. Kubernetes provides orchestration, auto-scaling, and self-healing for production workloads.",
       },
     ],
+    theme: {
+      gradient: "from-violet-400 to-purple-500",
+      textPrimary: "text-violet-400",
+      bgPrimary: "bg-violet-400",
+      iconBg: "bg-violet-400/10",
+      hoverBorder: "hover:border-violet-400/50",
+      pillBg: "bg-violet-400/10",
+      pillBorder: "border-violet-400/20",
+    },
     timelineItems: [
       {
         duration: "3-5",
@@ -680,6 +730,12 @@ export const featureCards: FeatureCard = {
         description: "for simple sites",
       },
     },
+    hero: {
+      title: "Full-Stack Development",
+      subtitle: "Complete end-to-end web application development",
+      icon: "Zap",
+    },
+    icon: Zap,
     includedServices: [
       "Complete UI/UX Implementation",
       "Responsive Front-End Development",
@@ -700,6 +756,14 @@ export const featureCards: FeatureCard = {
       "Documentation & Training",
       "Ongoing Maintenance & Support",
     ],
+    overview: {
+      heading: "Everything You Need, One Developer",
+      paragraphs: [
+        "Why coordinate between multiple developers when one expert can handle it all? Full-stack development means seamless integration, faster communication, and a cohesive vision from database to deployment. No miscommunication between teams, no integration headaches—just clean code that works together harmoniously.",
+        "I've spent years mastering both the client and server sides of web development, allowing me to architect complete solutions that work together seamlessly. From initial concept to production deployment, I manage every aspect of your application, ensuring consistency, quality, and performance at every layer of the stack.",
+        "Whether you're an entrepreneur with a product vision, a startup building an MVP, or a business replacing legacy systems, I deliver fully functional web applications that are ready to scale. You get a complete solution—front-end, back-end, database, deployment, and ongoing support—all from one experienced developer who understands the full picture.",
+      ],
+    },
     processSteps: [
       {
         number: "01",
@@ -842,6 +906,15 @@ export const featureCards: FeatureCard = {
           "PostgreSQL for relational data, Redis for caching and sessions. Best of both worlds for performance and data integrity.",
       },
     ],
+    theme: {
+      gradient: "from-pink-400 to-rose-500",
+      textPrimary: "text-pink-400",
+      bgPrimary: "bg-pink-400",
+      iconBg: "bg-pink-400/10",
+      hoverBorder: "hover:border-pink-400/50",
+      pillBg: "bg-pink-400/10",
+      pillBorder: "border-pink-400/20",
+    },
     timelineItems: [
       {
         duration: "6-8",
@@ -948,6 +1021,12 @@ export const featureCards: FeatureCard = {
         description: "for simple sites",
       },
     },
+    hero: {
+      title: "Web Development",
+      subtitle: "Custom solutions for your unique business needs",
+      icon: "Coffee",
+    },
+    icon: Coffee,
     includedServices: [
       "Custom WordPress Theme Development",
       "WordPress Plugin Development & Customization",
@@ -968,6 +1047,14 @@ export const featureCards: FeatureCard = {
       "Training & Documentation",
       "Ongoing Support & Updates",
     ],
+    overview: {
+      heading: "The Right Solution for Your Business",
+      paragraphs: [
+        "Not every business needs a complex custom application. Sometimes what you need is a professional website you can manage yourself, an online store to sell products, or a blog to share your expertise. That's where WordPress and modern CMS platforms shine—powerful enough for anything you need, simple enough that you can manage it without a developer.",
+        "I specialize in WordPress development, from simple business sites to complex e-commerce stores. Whether you need a custom theme built from scratch, WooCommerce integration for selling products, or a content-rich blog with advanced features, I deliver solutions that are fast, secure, and easy for you to manage.",
+        "What makes my approach different? I don't just install a theme and call it done. I build custom solutions tailored to your brand, optimize for speed and SEO, implement proper security, and train you on managing your site. You get a professional website that works for your business, not against it.",
+      ],
+    },
     processSteps: [
       {
         number: "01",
@@ -1124,6 +1211,15 @@ export const featureCards: FeatureCard = {
           "WordPress sites get a bad reputation for speed and security—but only when built poorly. I implement caching, CDN, optimized images, and security hardening so your site is fast and safe.",
       },
     ],
+    theme: {
+      gradient: "from-amber-400 to-orange-500",
+      textPrimary: "text-amber-400",
+      bgPrimary: "bg-amber-400",
+      iconBg: "bg-amber-400/10",
+      hoverBorder: "hover:border-amber-400/50",
+      pillBg: "bg-amber-400/10",
+      pillBorder: "border-amber-400/20",
+    },
     timelineItems: [
       {
         duration: "2-3",

@@ -1,35 +1,35 @@
-import { LucideIcon } from "lucide-react"
+import { Check } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
-export default function WebDevelopmentDetailPage({
+import { FeatureCard } from "@/app/interfaces/services"
+export default function FrontEndDetailPage({
   activeTab,
-  Coffee,
-  Check,
+  selectedService,
 }: {
   activeTab: string
-  Coffee: LucideIcon
-  Check: LucideIcon
-  ArrowRight: LucideIcon
+  selectedService: FeatureCard
 }) {
-  const { webdevelopment } = featureCards
-
+  const serviceConfig = featureCards[selectedService]
+  console.log(selectedService, serviceConfig)
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6">
+    <div className={`min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6`}>
       <div className="min-w-7xl max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center">
-              <Coffee className="w-10 h-10 text-white" />
+            <div
+              className={`w-20 h-20 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl flex items-center justify-center`}
+            >
+              <serviceConfig.icon className="w-10 h-10 text-white" />
             </div>
             <div>
               <h1
                 className="text-5xl font-black mb-2"
                 style={{ fontFamily: '"Space Grotesk", sans-serif' }}
               >
-                Web Development
+                {serviceConfig.hero.title}
               </h1>
               <p className="text-xl text-zinc-400">
-                Custom solutions for your unique business needs
+                {serviceConfig.hero.subtitle}
               </p>
             </div>
           </div>
@@ -38,47 +38,31 @@ export default function WebDevelopmentDetailPage({
         {/* Overview Tab */}
         {activeTab === "overview" && (
           <div className="space-y-8">
+            {/* Main Description */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">
-                The Right Solution for Your Business
+                {serviceConfig.overview.heading}
               </h2>
               <div className="space-y-4 text-zinc-300 text-lg leading-relaxed">
-                <p>
-                  Not every business needs a complex custom application.
-                  Sometimes what you need is a professional website you can
-                  manage yourself, an online store to sell products, or a blog
-                  to share your expertise. That's where WordPress and modern CMS
-                  platforms shine—powerful enough for anything you need, simple
-                  enough that you can manage it without a developer.
-                </p>
-                <p>
-                  I specialize in WordPress development, from simple business
-                  sites to complex e-commerce stores. Whether you need a custom
-                  theme built from scratch, WooCommerce integration for selling
-                  products, or a content-rich blog with advanced features, I
-                  deliver solutions that are fast, secure, and easy for you to
-                  manage.
-                </p>
-                <p>
-                  What makes my approach different? I don't just install a theme
-                  and call it done. I build custom solutions tailored to your
-                  brand, optimize for speed and SEO, implement proper security,
-                  and train you on managing your site. You get a professional
-                  website that works for your business, not against it.
-                </p>
+                {serviceConfig.overview.paragraphs.map((para, idx) => (
+                  <p key={idx} className="block mb-4">
+                    {para}
+                  </p>
+                ))}
               </div>
             </div>
 
+            {/* Key Features Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {webdevelopment.features.map((feature, index) => {
+              {serviceConfig.features.map((feature, index) => {
                 const Icon = feature.icon
                 return (
                   <div
                     key={index}
-                    className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 transition-colors"
+                    className={`bg-zinc-900/80 border ${serviceConfig.theme.pillBorder} rounded-2xl p-6 ${serviceConfig.theme.hoverBorder} transition-colors`}
                   >
-                    <div className="w-12 h-12 bg-amber-400/10 rounded-xl flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-amber-400" />
+                    <div className={`w-12 h-12 ${serviceConfig.theme.iconBg} rounded-xl flex items-center justify-center mb-4`}>
+                      <Icon className={`w-6 h-6 ${serviceConfig.theme.textPrimary}`} />
                     </div>
                     <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                     <p className="text-zinc-400">{feature.description}</p>
@@ -95,9 +79,9 @@ export default function WebDevelopmentDetailPage({
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-8">What's Included</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {webdevelopment.includedServices.map((service, index) => (
+                {serviceConfig.includedServices.map((service, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-amber-400 rounded-full flex items-center justify-center mt-1">
+                    <div className={`flex-shrink-0 w-6 h-6 ${serviceConfig.theme.bgPrimary} rounded-full flex items-center justify-center mt-1`}>
                       <Check className="w-4 h-4 text-zinc-950" />
                     </div>
                     <span className="text-zinc-300">{service}</span>
@@ -106,15 +90,16 @@ export default function WebDevelopmentDetailPage({
               </div>
             </div>
 
+            {/* Use Cases */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">Perfect For</h2>
               <div className="grid md:grid-cols-2 gap-4">
-                {webdevelopment.useCases.map((useCase, index) => (
+                {serviceConfig.useCases.map((useCase, index) => (
                   <div
                     key={index}
                     className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700"
                   >
-                    <h3 className="text-lg font-bold mb-2 text-amber-400">
+                    <h3 className={`text-lg font-bold mb-2 ${serviceConfig.theme.textPrimary}`}>
                       {useCase.title}
                     </h3>
                     <p className="text-zinc-400 text-sm">
@@ -133,10 +118,10 @@ export default function WebDevelopmentDetailPage({
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-8">Development Process</h2>
               <div className="space-y-8">
-                {webdevelopment.processSteps.map((step, index) => (
+                {serviceConfig.processSteps.map((step, index) => (
                   <div key={index} className="flex gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center text-2xl font-black">
+                      <div className={`w-16 h-16 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl flex items-center justify-center text-2xl font-black`}>
                         {step.number}
                       </div>
                     </div>
@@ -149,7 +134,7 @@ export default function WebDevelopmentDetailPage({
                         {step.deliverables.map((deliverable, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-amber-400/10 border border-amber-400/20 rounded-full text-sm text-amber-400"
+                            className={`px-3 py-1 ${serviceConfig.theme.pillBg} border ${serviceConfig.theme.pillBorder} rounded-full text-sm ${serviceConfig.theme.textPrimary}`}
                           >
                             {deliverable}
                           </span>
@@ -161,15 +146,16 @@ export default function WebDevelopmentDetailPage({
               </div>
             </div>
 
+            {/* Timeline */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">Typical Timeline</h2>
               <div className="grid md:grid-cols-3 gap-6">
-                {webdevelopment.timelineItems.map((item, index) => (
+                {serviceConfig.timelineItems.map((item, index) => (
                   <div
                     key={index}
                     className="text-center p-6 bg-zinc-800/50 rounded-xl"
                   >
-                    <div className="text-4xl font-black text-amber-400 mb-2">
+                    <div className={`text-4xl font-black ${serviceConfig.theme.textPrimary} mb-2`}>
                       {item.duration}
                     </div>
                     <div className="text-sm text-zinc-400 mb-2">
@@ -192,7 +178,7 @@ export default function WebDevelopmentDetailPage({
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-8">Technology Stack</h2>
 
-              {webdevelopment.technologyCategories.map((category, index) => (
+              {serviceConfig.technologyCategories.map((category, index) => (
                 <div key={index} className="mb-12 last:mb-0">
                   <h3 className={`text-xl font-bold mb-4 ${category.color}`}>
                     {category.title}
@@ -211,23 +197,20 @@ export default function WebDevelopmentDetailPage({
               ))}
             </div>
 
+            {/* Why These Technologies */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">
                 Why These Technologies?
               </h2>
               <div className="space-y-6 text-zinc-300">
-                {webdevelopment.technologyExplanations.map(
-                  (explanation, index) => (
-                    <div key={index}>
-                      <h3 className="text-xl font-bold mb-2 text-amber-400">
-                        {explanation.title}
-                      </h3>
-                      <p className="leading-relaxed">
-                        {explanation.description}
-                      </p>
-                    </div>
-                  ),
-                )}
+                {serviceConfig.technologyExplanations.map((explanation, index) => (
+                  <div key={index}>
+                    <h3 className={`text-xl font-bold mb-2 ${serviceConfig.theme.textPrimary}`}>
+                      {explanation.title}
+                    </h3>
+                    <p className="leading-relaxed">{explanation.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
