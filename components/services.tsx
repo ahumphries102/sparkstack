@@ -1,17 +1,18 @@
 "use client"
 import { serviceData } from "@/app/data/serviceData"
+import { useService } from "@/app/data/serviceContext"
 import Link from "next/link"
+import { FeatureCard } from "@/interfaces/services";
 export default function Services() {
+  const { setSelectedService } = useService();
+  const handlePick = (path: keyof FeatureCard) => {
+    setSelectedService(path)
+  }
   return (
     <section id="services" className="relative py-32 px-6">
       <div className="max-w-7xl mx-auto">
         {/* --- Header --- */}
-        <Link href="#services2" className="text-center mb-20">
-          <div className="inline-block px-4 py-2 bg-zinc-800/50 rounded-full border border-zinc-700 mb-6">
-            <span className="text-sm text-violet-400 font-semibold">
-              What I Offer
-            </span>
-          </div>
+        <div className="text-center mb-20">
           <h2
             className="text-6xl font-black mb-6"
             style={{ fontFamily: '"Space Grotesk", sans-serif' }}
@@ -24,11 +25,16 @@ export default function Services() {
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             Flexible solutions tailored to your project needs and budget.
           </p>
-        </Link>
+        </div>
 
         <div className="flex flex-wrap gap-4">
           {serviceData.map((service) => (
-            <Link className="flex-1" href={`/services/${service.route}`} key={service.title}>
+            <Link
+              onClick={() => handlePick(service.path)}
+              className="flex-1"
+              href={`/services`}
+              key={service.title}
+            >
               <div className="min-w-[250px] group relative bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 hover:border-zinc-700 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer">
                 {/* Card Decoration */}
                 <div
