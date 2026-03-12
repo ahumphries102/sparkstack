@@ -1,14 +1,15 @@
 import { Check } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
-import { FeatureCard } from "@/app/interfaces/services"
+import { FeatureCard } from "@/interfaces/services"
 export default function FrontEndDetailPage({
   activeTab,
   selectedService,
 }: {
   activeTab: string
-  selectedService: FeatureCard
+  selectedService: string
 }) {
-  const serviceConfig = featureCards[selectedService]
+  console.log(selectedService, featureCards)
+  const serviceConfig = featureCards[selectedService as keyof FeatureCard]
   return (
     <div className={`min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6`}>
       <div className="min-w-7xl max-w-7xl mx-auto">

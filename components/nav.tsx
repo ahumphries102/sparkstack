@@ -1,12 +1,5 @@
 import Link from "next/link"
 
-const services = [
-  { name: "Frontend", href: "/services/frontend" },
-  { name: "Backend", href: "/services/backend" },
-  { name: "Full-Stack", href: "/services/fullstack" },
-  { name: "Web Dev", href: "/services/webdevelopment" },
-]
-
 export default function Navigation() {
   return (
     <nav
@@ -15,9 +8,15 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link
           href="/"
-          className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-400 to-pink-400 bg-clip-text text-transparent"
         >
-          ⚡ Spark Stack
+          <div
+            className="w-20 h-15 logo-mask"
+            style={{
+              maskImage: "url(/spark_stack_logo1.svg)",
+              maskRepeat: "no-repeat",
+              maskSize: "contain",
+            }}
+          />
         </Link>
 
         <div className="hidden md:flex gap-8">

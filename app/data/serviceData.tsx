@@ -40,13 +40,13 @@ export const serviceData = [
     ],
     icon: <Camera className="w-8 h-8" />,
 
-    route: "frontend",
+    path: "frontend" as keyof FeatureCard,
 
     title: "Front-End",
   },
   {
     title: "Back-End",
-    route: "backend",
+    path: "backend" as keyof FeatureCard,
     icon: <Code className="w-8 h-8" />,
     description: "Robust server-side solutions for your applications",
     features: [
@@ -61,7 +61,7 @@ export const serviceData = [
   },
   {
     title: "Full-Stack",
-    route: "fullstack",
+    path: "fullstack" as keyof FeatureCard,
     icon: <Zap className="w-8 h-8" />,
     description: "Complete end-to-end web application development",
     features: [
@@ -86,8 +86,7 @@ export const serviceData = [
       "SEO Optimization",
       "Analytics Integration",
     ],
-    path: { id: "webdevelopment", label: "4. webdevelopment" },
-    route: "webdevelopment",
+    path: "webdevelopment" as keyof FeatureCard,
     color: "from-amber-400 to-orange-500",
   },
 ]

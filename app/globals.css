@@ -1,2 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@layer components {
+  .logo-mask {
+    font-family: var(--font-staatliches), sans-serif;
+    @apply bg-gradient-to-r from-[#17CED5] from-[25%] to-white to-[25%];
+  }
+}

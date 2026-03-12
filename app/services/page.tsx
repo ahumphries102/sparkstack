@@ -15,6 +15,7 @@ export default function ServiceSlugPage() {
     { id: "process", label: "Process" },
     { id: "technologies", label: "Technologies" },
   ]
+
   const serviceConfig = featureCards[selectedService]
   const featureCardsToArray = Object.values(featureCards).map((value) => value)
   return (

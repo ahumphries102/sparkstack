@@ -2,10 +2,11 @@
 import { serviceData } from "@/app/data/serviceData"
 import { useService } from "@/app/data/serviceContext"
 import Link from "next/link"
+import { FeatureCard } from "@/interfaces/services";
 export default function Services() {
   const { setSelectedService } = useService();
-  const handlePick = (choice: string) => {
-    setSelectedService(choice)
+  const handlePick = (path: keyof FeatureCard) => {
+    setSelectedService(path)
   }
   return (
     <section id="services" className="relative py-32 px-6">
@@ -29,7 +30,7 @@ export default function Services() {
         <div className="flex flex-wrap gap-4">
           {serviceData.map((service) => (
             <Link
-              onClick={() => handlePick(service.route as "frontend" | "fullstack")} // Pass the string route here
+              onClick={() => handlePick(service.path)}
               className="flex-1"
               href={`/services`}
               key={service.title}

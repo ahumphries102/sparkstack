@@ -1,9 +1,10 @@
 'use client';
 
+import { FeatureCard } from '@/interfaces/services';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 // 1. Define your 4 specific outcomes
-type ServiceType = 'frontend' | 'fullstack' | 'backend' | 'webdevelopment' | null;
+type ServiceType = keyof FeatureCard;
 
 interface ServiceContextType {
   selectedService: ServiceType;
@@ -13,7 +14,7 @@ interface ServiceContextType {
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
-  const [selectedService, setSelectedService] = useState<ServiceType>(null);
+  const [selectedService, setSelectedService] = useState<ServiceType>('frontend');
 
   return (
     <ServiceContext.Provider value={{ selectedService, setSelectedService }}>

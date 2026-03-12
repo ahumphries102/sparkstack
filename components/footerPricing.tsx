@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
-import { FeatureCard } from "@/app/interfaces/services"
+import { FeatureCard } from "@/interfaces/services"
 export default function PricingFooter({
   selectedService,
 }: {
-  selectedService: FeatureCard
+  selectedService: string
 }) {
-  const serviceConfig = featureCards[selectedService]
+  const serviceConfig = featureCards[selectedService as keyof FeatureCard]
   return (
     <footer
       className={`mt-16 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl p-8 md:p-12 text-center`}

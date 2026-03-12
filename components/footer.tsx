@@ -1,4 +1,4 @@
-import {Mail, Github, Linkedin } from "lucide-react"
+import { Mail, Github, Linkedin } from "lucide-react"
 import Link from "next/link"
 
 export default function Footer({}) {
@@ -6,8 +6,15 @@ export default function Footer({}) {
     <footer className="relative border-t border-zinc-800 py-12 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-400 to-pink-400 bg-clip-text text-transparent">
-            ⚡ Spark Stack
+          <Link href="/">
+            <div
+              className="w-20 h-15 logo-mask"
+              style={{
+                maskImage: "url(/spark_stack_logo1.svg)",
+                maskRepeat: "no-repeat",
+                maskSize: "contain",
+              }}
+            />
           </Link>
 
           <div className="flex gap-6 text-sm text-zinc-400">
