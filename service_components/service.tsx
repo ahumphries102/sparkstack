@@ -1,14 +1,13 @@
-import { Check } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
 import { FeatureCard } from "@/interfaces/services"
-export default function FrontEndDetailPage({
+import Pricing from "@/service_components/pricing"
+export default function Services({
   activeTab,
   selectedService,
 }: {
   activeTab: string
   selectedService: string
 }) {
-  console.log(selectedService, featureCards)
   const serviceConfig = featureCards[selectedService as keyof FeatureCard]
   return (
     <div className={`min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6`}>
@@ -73,44 +72,6 @@ export default function FrontEndDetailPage({
           </div>
         )}
 
-        {/* Services Tab */}
-        {activeTab === "services" && (
-          <div className="space-y-8">
-            <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
-              <h2 className="text-3xl font-bold mb-8">What's Included</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {serviceConfig.includedServices.map((service, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <div className={`flex-shrink-0 w-6 h-6 ${serviceConfig.theme.bgPrimary} rounded-full flex items-center justify-center mt-1`}>
-                      <Check className="w-4 h-4 text-zinc-950" />
-                    </div>
-                    <span className="text-zinc-300">{service}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Use Cases */}
-            <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
-              <h2 className="text-3xl font-bold mb-6">Perfect For</h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                {serviceConfig.useCases.map((useCase, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700"
-                  >
-                    <h3 className={`text-lg font-bold mb-2 ${serviceConfig.theme.textPrimary}`}>
-                      {useCase.title}
-                    </h3>
-                    <p className="text-zinc-400 text-sm">
-                      {useCase.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Process Tab */}
         {activeTab === "process" && (
@@ -214,6 +175,12 @@ export default function FrontEndDetailPage({
               </div>
             </div>
           </div>
+        )}
+
+        
+        {/* Services Tab */}
+        {activeTab === "pricing" && (
+          <Pricing selectedService={selectedService} />
         )}
       </div>
     </div>
