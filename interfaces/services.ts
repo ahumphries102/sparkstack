@@ -1,18 +1,28 @@
 import { LucideIcon } from "lucide-react"
 
-interface Features {
+type AddOn = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
+type Features = {
   icon: LucideIcon
   title: string
   description: string
 }
 
-interface Feature {
+type Feature = {
+  addOns: AddOn[]
   features: Features[]
   footerPricing: FooterPricing
   hero: Hero
   icon: LucideIcon
   includedServices: string[]
   overview: Overview
+  packages: Package[]
   processSteps: ProcessStep[]
   service: string
   technologyCategories: TechnologyCategory[]
@@ -22,13 +32,14 @@ interface Feature {
   useCases: UseCase[]
 }
 
-interface FeatureCard {
+type FeatureCard = {
+  [key: string]: Feature
   frontend: Feature
   backend: Feature
   fullstack: Feature
   webdevelopment: Feature
 }
-interface FooterPricing {
+type FooterPricing = {
   color: string
   title: string
   description: string
@@ -42,41 +53,55 @@ interface FooterPricing {
   }
 }
 
-interface Hero {
+type Hero = {
   title: string
   subtitle: string
   icon: string
 }
 
-interface UseCase {
+type UseCase = {
   title: string
   description: string
 }
 
-interface Overview {
+type Overview = {
   heading: string
   paragraphs: string[]
 }
 
-interface ProcessStep {
+type Package = {
+  id: string
+  name: string
+  price: number
+  description: string
+  features: string[]
+  popular?: boolean
+}
+
+type ProcessStep = {
   number: string
   title: string
   description: string
   deliverables: string[]
 }
 
-interface TechnologyCategory {
+type Tabs = {
+  id: string
+  label: string
+}
+
+type TechnologyCategory = {
   title: string
   color: string
   technologies: string[]
 }
 
-interface TechnologyExplanation {
+type TechnologyExplanation = {
   title: string
   description: string
 }
 
-interface Theme {
+type Theme = {
   gradient: string
   textPrimary: string
   bgPrimary: string
@@ -86,11 +111,11 @@ interface Theme {
   pillBorder: string
 }
 
-interface TimelineItems {
+type TimelineItems = {
   duration: string
   period: string
   label: string
   description: string
 }
 
-export { type FeatureCard }
+export { type AddOn, type FeatureCard, type Tabs }
