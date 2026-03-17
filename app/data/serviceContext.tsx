@@ -8,16 +8,19 @@ type ServiceType = keyof FeatureCard;
 
 interface ServiceContextType {
   selectedService: ServiceType;
+  selectedAddOns: string[];
   setSelectedService: (service: ServiceType) => void;
+  setSelectedAddOns: (addOns: string[]) => void;
 }
 
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
   const [selectedService, setSelectedService] = useState<ServiceType>('frontend');
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
 
   return (
-    <ServiceContext.Provider value={{ selectedService, setSelectedService }}>
+    <ServiceContext.Provider value={{ selectedService, setSelectedService, selectedAddOns, setSelectedAddOns }}>
       {children}
     </ServiceContext.Provider>
   );

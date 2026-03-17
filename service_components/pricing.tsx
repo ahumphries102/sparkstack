@@ -2,13 +2,15 @@ import { useState } from "react"
 import { AddOn } from "@/interfaces/services"
 import { Check, Sparkles } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
+import { useService } from "@/app/data/serviceContext"
 
-export default function Pricing({
-  selectedService,
-}: {
-  selectedService: string
-}) {
-  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
+export default function Pricing() {
+  const [selectedPackage, setSelectedPackage] = useState<string>("standard")
+  const {
+    selectedService,
+    selectedAddOns,
+    setSelectedAddOns,
+  } = useService()
 
   const toggleAddOn = (id: string) => {
     setSelectedAddOns((prev) =>
@@ -28,12 +30,12 @@ export default function Pricing({
     design: "Design Upgrades",
     testing: "Quality Assurance",
   }
-  const bgGradient = featureCards[selectedService].theme.gradient;
-  const bgTheme = featureCards[selectedService].theme.bgPrimary;
-  const textTheme = featureCards[selectedService].theme.textPrimary;
-  const pillBg = featureCards[selectedService].theme.pillBg;
-  const pillBorder = featureCards[selectedService].theme.pillBorder;
-
+  const bgGradient = featureCards[selectedService].theme.gradient
+  const bgTheme = featureCards[selectedService].theme.bgPrimary
+  const textTheme = featureCards[selectedService].theme.textPrimary
+  const pillBg = featureCards[selectedService].theme.pillBg
+  const pillBorder = featureCards[selectedService].theme.pillBorder
+  
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6">
       <div className="max-w-7xl mx-auto">
@@ -46,11 +48,14 @@ export default function Pricing({
             {featureCards[selectedService].packages.map((pkg) => (
               <div
                 key={pkg.id}
+                onClick={() => setSelectedPackage(pkg.id)}
                 className={`relative bg-zinc-900/80 border-2 rounded-2xl p-6 cursor-pointer transition-all`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className={`px-4 py-1 bg-gradient-to-r ${bgGradient} rounded-full text-sm font-bold text-white flex items-center gap-1`}>
+                    <span
+                      className={`px-4 py-1 ${bgGradient} rounded-full text-sm font-bold text-white flex items-center gap-1`}
+                    >
                       <Sparkles className="w-3 h-3" />
                       Most Popular
                     </span>
@@ -70,8 +75,10 @@ export default function Pricing({
                 <ul className="space-y-3 mb-6">
                   {pkg.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-2 text-sm">
-                      <Check className={`w-5 h-5 ${textTheme} flex-shrink-0 mt-0.5`} />
-                      <span className="text-zinc-300">{feature}</span>
+                      <Check
+                        className={`w-5 h-5 ${textTheme} flex-shrink-0 mt-0.5`}
+                      />
+                      <span className="">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -106,7 +113,7 @@ export default function Pricing({
                       return (
                         <div
                           key={addon.id}
-                          onClick={() => toggleAddOn(addon.id)}
+                          onClick={() => toggleAddOn(addon)}
                           className={`bg-zinc-900/80 border-2 rounded-xl p-4 cursor-pointer transition-all
                           ${
                             isSelected
@@ -120,12 +127,10 @@ export default function Pricing({
                               className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0
                             ${isSelected ? `${pillBorder} ${bgTheme}` : "border-zinc-600"}`}
                             >
-                              {isSelected && (
-                                <Check className="w-4 h-4 text-zinc-950" />
-                              )}
+                              {isSelected && <Check className="w-4 h-4 " />}
                             </div>
                           </div>
-                          <p className="text-sm text-zinc-400 mb-3">
+                          <p className="text-sm text-zinc-400">
                             {addon.description}
                           </p>
                           <div className={`text-xl font-bold  ${textTheme}`}>
@@ -139,14 +144,6 @@ export default function Pricing({
               )
             },
           )}
-        </div>
-
-        {/* Payment Options */}
-        <div className="mt-8 text-center text-zinc-400">
-          <p className="mb-2">💳 Flexible payment plans available</p>
-          <p className="text-sm">
-            50% upfront, 50% on completion • Or split into 3 monthly payments
-          </p>
         </div>
       </div>
     </div>

@@ -2,6 +2,14 @@
 @plugin "daisyui";
 
 @layer components {
+  .darkBg {
+    & p {
+      @apply text-zinc-300;
+    }
+  }
+  p {
+    @apply text-zinc-900;
+  }
   .logo-mask {
     font-family: var(--font-staatliches), sans-serif;
     @apply bg-gradient-to-r from-[#17CED5] from-[25%] to-white to-[25%];

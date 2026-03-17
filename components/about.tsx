@@ -52,7 +52,7 @@ export default function about({}) {
               </span>
             </h2>
 
-            <div className="space-y-4 text-zinc-300 text-lg leading-relaxed">
+            <div className="darkBg space-y-4  text-lg leading-relaxed">
               <p>
                 A dedicated full-stack developer and graphic designer based
                 right here in McMinnville, Oregon. With over 6 years of
