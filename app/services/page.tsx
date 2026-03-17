@@ -59,23 +59,23 @@ export default function ServicePage() {
                   <div>
                     <div className="text-5xl"></div>
                     <p className="text-sm">One-time projected cost</p>
-                    <hr className="my-2" />
-                    {selectedAddOns[0] &&
-                      selectedAddOns.map((addOn: AddOn) => {
-                        return (
+                    {selectedAddOns.length > 0 && (
+                      <>
+                        <hr className="my-2" />
+
+                        {selectedAddOns.map((addOn: AddOn) => (
                           <div key={addOn.id}>
                             <p>
-                              {addOn?.name}: ${addOn?.price}
+                              {addOn.name}: ${addOn.price}
                             </p>
                           </div>
-                        )
-                      })}
+                        ))}
 
-                    {selectedAddOns.length > 0 && (
-                      <h1 className="card-title">
-                        Total: $
-                        {selectedAddOns.reduce((a, b) => a + b.price, 0)}
-                      </h1>
+                        <h1 className="card-title">
+                          Total: $
+                          {selectedAddOns.reduce((a, b) => a + b.price, 0)}
+                        </h1>
+                      </>
                     )}
                   </div>
 

@@ -1,5 +1,5 @@
 'use client';
-
+import { AddOn } from "@/interfaces/services"
 import { FeatureCard } from '@/interfaces/services';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
@@ -8,16 +8,16 @@ type ServiceType = keyof FeatureCard;
 
 interface ServiceContextType {
   selectedService: ServiceType;
-  selectedAddOns: string[];
+  selectedAddOns: AddOn[];
   setSelectedService: (service: ServiceType) => void;
-  setSelectedAddOns: (addOns: string[]) => void;
+  setSelectedAddOns: React.Dispatch<React.SetStateAction<AddOn[]>>;
 }
 
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
   const [selectedService, setSelectedService] = useState<ServiceType>('frontend');
-  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
+  const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([])
 
   return (
     <ServiceContext.Provider value={{ selectedService, setSelectedService, selectedAddOns, setSelectedAddOns }}>

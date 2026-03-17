@@ -10,7 +10,7 @@ export interface Package {
   popular?: boolean;
 }
 
-export interface AddOn {
+export type AddOn = {
   id: string;
   name: string;
   price: number;

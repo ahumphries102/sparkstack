@@ -5,17 +5,15 @@ import { featureCards } from "@/app/data/serviceData"
 import { useService } from "@/app/data/serviceContext"
 
 export default function Pricing() {
-  const [selectedPackage, setSelectedPackage] = useState<string>("standard")
-  const {
-    selectedService,
-    selectedAddOns,
-    setSelectedAddOns,
-  } = useService()
+  const [selectedPackage, setSelectedPackage] = useState<string>()
+  const { selectedService, selectedAddOns, setSelectedAddOns } = useService()
 
-  const toggleAddOn = (id: string) => {
-    setSelectedAddOns((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    )
+  const toggleAddOn = (id: AddOn) => {
+    setSelectedAddOns((prev) => {
+      return prev.includes(id)
+        ? prev.filter((item) => item !== id)
+        : [...prev, id]
+    })
   }
 
   const getAddOnsByCategory = (category: AddOn["category"]) => {
@@ -35,7 +33,8 @@ export default function Pricing() {
   const textTheme = featureCards[selectedService].theme.textPrimary
   const pillBg = featureCards[selectedService].theme.pillBg
   const pillBorder = featureCards[selectedService].theme.pillBorder
-  
+
+  console.log(selectedAddOns)
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6">
       <div className="max-w-7xl mx-auto">
@@ -49,7 +48,12 @@ export default function Pricing() {
               <div
                 key={pkg.id}
                 onClick={() => setSelectedPackage(pkg.id)}
-                className={`relative bg-zinc-900/80 border-2 rounded-2xl p-6 cursor-pointer transition-all`}
+                className={`relative bg-zinc-900/80 border-2 rounded-2xl p-6 cursor-pointer transition-all
+                  ${
+                    selectedPackage === pkg.id
+                      ? ` shadow-lg`
+                      : "border-zinc-800 hover:border-zinc-700"
+                  }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -108,8 +112,9 @@ export default function Pricing() {
                   </h3>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {categoryAddOns.map((addon) => {
-                      const isSelected = selectedAddOns.includes(addon.id)
-
+                      const isSelected = selectedAddOns.some(
+                        (selectedAddon) => selectedAddon.id === addon.id,
+                      )
                       return (
                         <div
                           key={addon.id}
