@@ -6,7 +6,7 @@ export default function Services({
   selectedService,
 }: {
   activeTab: string
-  selectedService: string
+  selectedService: keyof FeatureCard
 }) {
   const serviceConfig = featureCards[selectedService as keyof FeatureCard]
   return (
@@ -180,7 +180,7 @@ export default function Services({
         
         {/* Services Tab */}
         {activeTab === "pricing" && (
-          <Pricing selectedService={selectedService} />
+          <Pricing />
         )}
       </div>
     </div>

@@ -79,7 +79,7 @@ export default function ServicePage() {
 
                         <h1 className="card-title">
                           Total: $
-                          {selectedAddOns.reduce((a, b) => a + b.price, 0) + selectedPackage.price}
+                          {selectedAddOns.reduce((a, b) => a + b.price, 0) + selectedPackage.price!}
                         </h1>
                       </>
                     )}
