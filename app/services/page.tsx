@@ -1,19 +1,25 @@
 "use client"
-import { featureCards, tabs } from "@/app/data/serviceData"
-import { Tabs } from "@/interfaces/services"
-import { useService } from "@/app/data/serviceContext"
 import { useState } from "react"
+import { featureCards, tabs } from "@/app/data/serviceData"
+import { AddOn, Tabs } from "@/interfaces/services"
+import { useService } from "@/app/data/serviceContext"
 import Services from "@/service_components/service"
 
 export default function ServicePage() {
   const [activeTab, setActiveTab] = useState<Tabs["id"]>("overview")
-  const { selectedService, setSelectedService } = useService()
+  const {
+    selectedAddOns,
+    selectedPackage,
+    selectedService,
+    setSelectedService,
+  } = useService()
   const serviceConfig = featureCards[selectedService]
   const featureCardsToArray = Object.values(featureCards).map((value) => value)
+  
   return (
     <>
-      <div className="min-h-screen pt-20 flex justify-center">
-        <div className="h-100 sticky top-45 flex justify-end">
+      <div className="h-min-screen pt-20 flex justify-center">
+        <div className="h-[100%] sticky top-45 flex justify-end">
           <div className="flex-col">
             <div className="flex flex-col gap-4 mb-12 overflow-x-auto pb-2">
               <div className="flex gap-4 p-1">
@@ -38,7 +44,7 @@ export default function ServicePage() {
                   className={`px-6 py-3 rounded-xl font-semibold capitalize whitespace-nowrap transition-all
                 ${
                   activeTab === tab.id
-                    ? `bg-gradient-to-r ${serviceConfig.theme.gradient} text-white`
+                    ? `${serviceConfig.theme.gradient} text-white`
                     : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800"
                 }`}
                 >
@@ -49,27 +55,45 @@ export default function ServicePage() {
 
             {/* Pricing */}
             {activeTab === "pricing" && (
-              <div className={`card card-sm bg-gradient-to-br ${featureCards[selectedService].theme.gradient} rounded-2xl p-8 sticky bottom-6`}>
+              <div
+                className={`card card-sm ${featureCards[selectedService].theme.gradient} rounded-2xl`}
+              >
                 <div className="card-body">
-                  <h1 className="card-title">
-                    Your Project Total
-                  </h1>
-                  <p className="text-zinc-900">Package</p>
-                </div>
+                  <h1 className="card-title">Your Project Total</h1>
+                  <p>Package</p>
+                  <div>
+                    <div className="text-5xl"></div>
+                    <p className="text-sm">One-time projected cost</p>
+                    {(selectedPackage || selectedAddOns.length) && (
+                      <>
+                        <hr className="my-2" />
 
-                <div>
-                  <div className="text-5xl font-black text-zinc-950 mb-2"></div>
-                  <p className="text-sm text-zinc-900">One-time project cost</p>
-                </div>
+                        <p>{selectedPackage.name} ${selectedPackage.price}</p>
+                        {selectedAddOns.map((addOn: AddOn) => (
+                          <div key={addOn.id}>
+                            <p>
+                              {addOn.name}: ${addOn.price}
+                            </p>
+                          </div>
+                        ))}
 
-                <button className="px-8 py-4 bg-zinc-950 text-white rounded-xl font-semibold hover:bg-zinc-900 transition-all transform hover:scale-105 flex items-center gap-2">
-                  Get Started
-                </button>
+                        <h1 className="card-title">
+                          Total: $
+                          {selectedAddOns.reduce((a, b) => a + b.price, 0) + selectedPackage.price}
+                        </h1>
+                      </>
+                    )}
+                  </div>
+
+                  <button className="px-8 py-4 bg-zinc-950 text-white rounded-xl font-semibold hover:bg-zinc-900 transition-all transform hover:scale-105 flex items-center gap-2">
+                    Get Started
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
-        <div className="min-h-screen bg-zinc-950 text-zinc-100 py-20 px-6">
+        <div className="bg-zinc-850 text-zinc-100 px-6">
           <Services selectedService={selectedService} activeTab={activeTab} />
         </div>
       </div>

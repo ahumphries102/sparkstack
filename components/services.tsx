@@ -56,7 +56,7 @@ export default function Services() {
                   {service.features.map((feature, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2 text-sm text-zinc-300"
+                      className="flex items-start gap-2 text-sm "
                     >
                       <div
                         className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.color} mt-2 flex-shrink-0`}

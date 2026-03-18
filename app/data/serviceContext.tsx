@@ -1,31 +1,49 @@
-'use client';
-
-import { FeatureCard } from '@/interfaces/services';
-import { createContext, useContext, useState, ReactNode } from 'react';
+"use client"
+import { AddOn } from "@/interfaces/services"
+import { Package } from "@/app/data/pricingData"
+import { FeatureCard } from "@/interfaces/services"
+import { createContext, useContext, useState, ReactNode } from "react"
 
 // 1. Define your 4 specific outcomes
-type ServiceType = keyof FeatureCard;
+type ServiceType = keyof FeatureCard
 
 interface ServiceContextType {
-  selectedService: ServiceType;
-  setSelectedService: (service: ServiceType) => void;
+  selectedAddOns: AddOn[]
+  selectedPackage: Package
+  selectedService: ServiceType
+  setSelectedAddOns: React.Dispatch<React.SetStateAction<AddOn[]>>
+  setSelectedPackage: (Package: Package) => void
+  setSelectedService: (service: ServiceType) => void
 }
 
-const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
+const ServiceContext = createContext<ServiceContextType | undefined>(undefined)
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
-  const [selectedService, setSelectedService] = useState<ServiceType>('frontend');
+  const [selectedService, setSelectedService] =
+    useState<ServiceType>("frontend")
+  const [selectedPackage, setSelectedPackage] = useState({})
+  const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([])
 
   return (
-    <ServiceContext.Provider value={{ selectedService, setSelectedService }}>
+    <ServiceContext.Provider
+      value={{
+        selectedService,
+        setSelectedService,
+        selectedAddOns,
+        setSelectedAddOns,
+        selectedPackage,
+        setSelectedPackage,
+      }}
+    >
       {children}
     </ServiceContext.Provider>
-  );
+  )
 }
 
 // Custom hook for easy use
 export const useService = () => {
-  const context = useContext(ServiceContext);
-  if (!context) throw new Error("useService must be used within a ServiceProvider");
-  return context;
-};
+  const context = useContext(ServiceContext)
+  if (!context)
+    throw new Error("useService must be used within a ServiceProvider")
+  return context
+}

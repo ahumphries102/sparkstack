@@ -426,7 +426,7 @@ export const featureCards: FeatureCard = {
       },
     ],
     theme: {
-      gradient: "from-cyan-400 to-blue-500",
+      gradient: "bg-gradient-to-r from-cyan-400 to-blue-500",
       textPrimary: "text-cyan-400",
       bgPrimary: "bg-cyan-400",
       iconBg: "bg-cyan-400/10",
@@ -870,7 +870,7 @@ export const featureCards: FeatureCard = {
       },
     ],
     theme: {
-      gradient: "from-violet-400 to-purple-500",
+      gradient: "bg-gradient-to-r from-violet-400 to-purple-500",
       textPrimary: "text-violet-400",
       bgPrimary: "bg-violet-400",
       iconBg: "bg-violet-400/10",
@@ -1308,7 +1308,7 @@ export const featureCards: FeatureCard = {
       },
     ],
     theme: {
-      gradient: "from-pink-400 to-rose-500",
+      gradient: "bg-gradient-to-r from-pink-400 to-rose-500",
       textPrimary: "text-pink-400",
       bgPrimary: "bg-pink-400",
       iconBg: "bg-pink-400/10",
@@ -1784,7 +1784,7 @@ export const featureCards: FeatureCard = {
       },
     ],
     theme: {
-      gradient: "from-amber-400 to-orange-500",
+      gradient: "bg-gradient-to-r from-amber-400 to-orange-500",
       textPrimary: "text-amber-400",
       bgPrimary: "bg-amber-400",
       iconBg: "bg-amber-400/10",

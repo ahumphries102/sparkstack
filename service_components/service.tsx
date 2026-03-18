@@ -36,13 +36,13 @@ export default function Services({
 
         {/* Overview Tab */}
         {activeTab === "overview" && (
-          <div className="space-y-8">
+          <div className="darkBg space-y-8">
             {/* Main Description */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">
                 {serviceConfig.overview.heading}
               </h2>
-              <div className="space-y-4 text-zinc-300 text-lg leading-relaxed">
+              <div className="space-y-4  text-lg leading-relaxed">
                 {serviceConfig.overview.paragraphs.map((para, idx) => (
                   <p key={idx} className="block mb-4">
                     {para}
@@ -122,7 +122,7 @@ export default function Services({
                     <div className="text-sm text-zinc-400 mb-2">
                       {item.period}
                     </div>
-                    <div className="text-zinc-300">{item.label}</div>
+                    <div className="">{item.label}</div>
                     <div className="text-sm text-zinc-500 mt-2">
                       {item.description}
                     </div>
@@ -163,7 +163,7 @@ export default function Services({
               <h2 className="text-3xl font-bold mb-6">
                 Why These Technologies?
               </h2>
-              <div className="space-y-6 text-zinc-300">
+              <div className="space-y-6 ">
                 {serviceConfig.technologyExplanations.map((explanation, index) => (
                   <div key={index}>
                     <h3 className={`text-xl font-bold mb-2 ${serviceConfig.theme.textPrimary}`}>

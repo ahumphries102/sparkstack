@@ -2,15 +2,15 @@ import { LucideIcon } from 'lucide-react';
 import { Camera, Code, Zap, Coffee } from 'lucide-react';
 
 export interface Package {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  features: string[];
+  id?: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  features?: string[];
   popular?: boolean;
 }
 
-export interface AddOn {
+export type AddOn = {
   id: string;
   name: string;
   price: number;
@@ -18,7 +18,7 @@ export interface AddOn {
   category: 'performance' | 'features' | 'design' | 'testing' | 'infrastructure' | 'integration' | 'content';
 }
 
-export interface ServicePricingData {
+export type ServicePricingData = {
   serviceId: string;
   serviceName: string;
   icon: LucideIcon;
