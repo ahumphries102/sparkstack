@@ -1,16 +1,21 @@
 "use client"
+import { useState } from "react"
 import { featureCards, tabs } from "@/app/data/serviceData"
 import { AddOn, Tabs } from "@/interfaces/services"
 import { useService } from "@/app/data/serviceContext"
-import { useState } from "react"
 import Services from "@/service_components/service"
 
 export default function ServicePage() {
   const [activeTab, setActiveTab] = useState<Tabs["id"]>("overview")
-  const { selectedService, setSelectedService, selectedAddOns } = useService()
-
+  const {
+    selectedAddOns,
+    selectedPackage,
+    selectedService,
+    setSelectedService,
+  } = useService()
   const serviceConfig = featureCards[selectedService]
   const featureCardsToArray = Object.values(featureCards).map((value) => value)
+  
   return (
     <>
       <div className="h-min-screen pt-20 flex justify-center">
@@ -59,10 +64,11 @@ export default function ServicePage() {
                   <div>
                     <div className="text-5xl"></div>
                     <p className="text-sm">One-time projected cost</p>
-                    {selectedAddOns.length > 0 && (
+                    {(selectedPackage || selectedAddOns.length) && (
                       <>
                         <hr className="my-2" />
 
+                        <p>{selectedPackage.name} ${selectedPackage.price}</p>
                         {selectedAddOns.map((addOn: AddOn) => (
                           <div key={addOn.id}>
                             <p>
@@ -73,7 +79,7 @@ export default function ServicePage() {
 
                         <h1 className="card-title">
                           Total: $
-                          {selectedAddOns.reduce((a, b) => a + b.price, 0)}
+                          {selectedAddOns.reduce((a, b) => a + b.price, 0) + selectedPackage.price}
                         </h1>
                       </>
                     )}

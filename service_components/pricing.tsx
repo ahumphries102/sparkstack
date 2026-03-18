@@ -5,8 +5,14 @@ import { featureCards } from "@/app/data/serviceData"
 import { useService } from "@/app/data/serviceContext"
 
 export default function Pricing() {
-  const [selectedPackage, setSelectedPackage] = useState<string>()
-  const { selectedService, selectedAddOns, setSelectedAddOns } = useService()
+  const [] = useState<string>()
+  const {
+    selectedService,
+    selectedAddOns,
+    selectedPackage,
+    setSelectedAddOns,
+    setSelectedPackage,
+  } = useService()
 
   const toggleAddOn = (id: AddOn) => {
     setSelectedAddOns((prev) => {
@@ -22,7 +28,7 @@ export default function Pricing() {
     )
   }
 
-  const categoryLabels = {
+  const categoryLabels: Record<AddOn["category"], string> = {
     performance: "Performance Enhancements",
     features: "Additional Features",
     design: "Design Upgrades",
@@ -33,8 +39,7 @@ export default function Pricing() {
   const textTheme = featureCards[selectedService].theme.textPrimary
   const pillBg = featureCards[selectedService].theme.pillBg
   const pillBorder = featureCards[selectedService].theme.pillBorder
-
-  console.log(selectedAddOns)
+console.log(selectedPackage)
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6">
       <div className="max-w-7xl mx-auto">
@@ -47,10 +52,15 @@ export default function Pricing() {
             {featureCards[selectedService].packages.map((pkg) => (
               <div
                 key={pkg.id}
-                onClick={() => setSelectedPackage(pkg.id)}
+                onClick={() =>
+                  setSelectedPackage({
+                    name: pkg.name,
+                    price: pkg.price,
+                  })
+                }
                 className={`relative bg-zinc-900/80 border-2 rounded-2xl p-6 cursor-pointer transition-all
                   ${
-                    selectedPackage === pkg.id
+                    selectedPackage.name === pkg.name
                       ? ` shadow-lg`
                       : "border-zinc-800 hover:border-zinc-700"
                   }`}
