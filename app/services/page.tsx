@@ -15,7 +15,18 @@ export default function ServicePage() {
   } = useService()
   const serviceConfig = featureCards[selectedService]
   const featureCardsToArray = Object.values(featureCards).map((value) => value)
-  
+  const totalAddOns = () => {
+    const addOnsTotal = selectedAddOns.reduce(
+      (total, addon) => total + addon.price,
+      0,
+    )
+    if (Object.keys(selectedPackage).length > 0) {
+      return addOnsTotal + selectedPackage.price!
+    } else {
+      return addOnsTotal
+    }
+  }
+
   return (
     <>
       <div className="h-min-screen pt-20 flex justify-center">
@@ -56,34 +67,34 @@ export default function ServicePage() {
             {/* Pricing */}
             {activeTab === "pricing" && (
               <div
-                className={`card card-sm ${featureCards[selectedService].theme.gradient} rounded-2xl`}
+                className={`card card-sm ${featureCards[selectedService].theme.gradient} rounded-2xl font-semibold`}
               >
-                <div className="card-body">
+                <div className="card-body text-zinc-900">
                   <h1 className="card-title">Your Project Total</h1>
-                  <p>Package</p>
-                  <div>
-                    <div className="text-5xl"></div>
-                    <p className="text-sm">One-time projected cost</p>
-                    {(selectedPackage || selectedAddOns.length) && (
+                  <>
+                    <p className="text-base">One-time projected cost</p>
+                    {(selectedAddOns.length > 0 || selectedPackage?.name) && (
                       <>
                         <hr className="my-2" />
 
-                        <p>{selectedPackage.name} ${selectedPackage.price}</p>
+                        {Object.keys(selectedPackage).length > 0 && (
+                          <p>
+                            Package: {selectedPackage.name} $
+                            {selectedPackage.price}
+                          </p>
+                        )}
                         {selectedAddOns.map((addOn: AddOn) => (
-                          <div key={addOn.id}>
-                            <p>
+                          <ul key={addOn.id}>
+                            <li>
                               {addOn.name}: ${addOn.price}
-                            </p>
-                          </div>
+                            </li>
+                          </ul>
                         ))}
 
-                        <h1 className="card-title">
-                          Total: $
-                          {selectedAddOns.reduce((a, b) => a + b.price, 0) + selectedPackage.price!}
-                        </h1>
+                        <h1 className="text-2xl">Total: ${totalAddOns()}</h1>
                       </>
                     )}
-                  </div>
+                  </>
 
                   <button className="px-8 py-4 bg-zinc-950 text-white rounded-xl font-semibold hover:bg-zinc-900 transition-all transform hover:scale-105 flex items-center gap-2">
                     Get Started

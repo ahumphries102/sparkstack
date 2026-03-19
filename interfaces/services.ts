@@ -1,11 +1,11 @@
 import { LucideIcon } from "lucide-react"
 
 type AddOn = {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  category: string;
+  id: string
+  name: string
+  price: number
+  description: string
+  category: string
 }
 
 type Features = {
@@ -37,7 +37,7 @@ type FeatureCard = {
   frontend: Feature
   backend: Feature
   fullstack: Feature
-  webdevelopment: Feature
+  webDev: Feature
 }
 type FooterPricing = {
   color: string
@@ -84,7 +84,15 @@ type ProcessStep = {
   description: string
   deliverables: string[]
 }
-
+type ServicePricingData = {
+  serviceId: string
+  serviceName: string
+  icon: LucideIcon
+  gradient: string
+  tagline: string
+  packages: Package[]
+  addOns: AddOn[]
+}
 type Tabs = {
   id: string
   label: string
@@ -118,4 +126,4 @@ type TimelineItems = {
   description: string
 }
 
-export { type AddOn, type FeatureCard, type Tabs }
+export { type AddOn, type FeatureCard, type Package, type ServicePricingData, type Tabs }
