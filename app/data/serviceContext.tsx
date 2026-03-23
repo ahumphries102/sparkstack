@@ -1,7 +1,6 @@
 "use client"
 import { AddOn } from "@/interfaces/services"
-import { Package } from "@/app/data/pricingData"
-import { FeatureCard } from "@/interfaces/services"
+import { FeatureCard, Package } from "@/interfaces/services"
 import {
   createContext,
   useContext,
@@ -14,10 +13,10 @@ type ServiceType = keyof FeatureCard
 
 interface ServiceContextType {
   selectedAddOns: AddOn[]
-  selectedPackage: Package
+  selectedPackage: any
   selectedService: ServiceType
   setSelectedAddOns: React.Dispatch<React.SetStateAction<AddOn[]>>
-  setSelectedPackage: (Package: Package) => Package
+  setSelectedPackage: (Package: any) => any
   setSelectedService: (service: ServiceType) => void
 }
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined)

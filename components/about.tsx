@@ -9,17 +9,13 @@ export default function about({}) {
           <div className="relative">
             <div
               className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-cyan-500/20 to-violet-500/20 
-                                  border border-zinc-800 backdrop-blur-sm"
+                                  border border-zinc-800 backdrop-blur-sm flex items-center justify-center"
             >
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center space-y-4 p-8">
-                  <Image
-                    src={profile_picture}
-                    alt="Profile"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
-              </div>
+              <Image
+                src={profile_picture}
+                alt="Profile"
+                className="w-3/4 h-auto aspect-square object-cover rounded-full"
+              />
             </div>
 
             {/* Floating Stats */}

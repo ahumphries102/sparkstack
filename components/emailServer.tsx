@@ -1,7 +1,7 @@
 "use server"
 import { AddOn, FinalQuote } from "@/interfaces/services"
 
-export async function sendQuote(formData: FinalQuote) {
+export async function sendQuote(formData: any) {
   const addOns = formData.addOns
     .map((addOn: AddOn) => `<li>${addOn.name + " $" + addOn.price}</li>`)
     .join("")

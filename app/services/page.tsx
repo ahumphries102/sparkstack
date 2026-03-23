@@ -56,8 +56,6 @@ export default function ServicePage() {
         second: "2-digit",
       }),
     }
-
-    console.log("Full Quote Data:", finalQuote)
     const result = await sendQuote(finalQuote)
   }
 
