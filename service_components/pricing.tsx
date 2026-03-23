@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AddOn } from "@/interfaces/services"
+import { AddOn, Package } from "@/interfaces/services"
 import { Check, Sparkles } from "lucide-react"
 import { featureCards } from "@/app/data/serviceData"
 import { useService } from "@/app/data/serviceContext"
@@ -13,6 +13,19 @@ export default function Pricing() {
     setSelectedAddOns,
     setSelectedPackage,
   } = useService()
+
+  const togglePackages = (clickedPackage: Partial<Package>): Partial<Package> => {
+    // 1. Compare the name of what was clicked to what is already in state
+    const isAlreadySelected = selectedPackage.name === clickedPackage.name
+
+    if (isAlreadySelected) {
+      // 2. If it's the same, "unselect" it by setting it to an empty object
+      return {}
+    } else {
+      // 3. If it's different, select the new one
+      return clickedPackage
+    }
+  }
 
   const toggleAddOn = (id: AddOn) => {
     setSelectedAddOns((prev) => {
@@ -52,10 +65,12 @@ export default function Pricing() {
               <div
                 key={pkg.id}
                 onClick={() =>
-                  setSelectedPackage({
-                    name: pkg.name,
-                    price: pkg.price,
-                  })
+                  setSelectedPackage(
+                    togglePackages({
+                      name: pkg.name,
+                      price: pkg.price,
+                    }),
+                  )
                 }
                 className={`relative bg-zinc-900/80 border-2 rounded-2xl p-6 cursor-pointer transition-all
                   ${

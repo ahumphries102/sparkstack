@@ -39,7 +39,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${staatliches.variable} antialiased bg-zinc-950 text-zinc-100 overflow-x-hidden`}
       >
         <Nav />
-        <main className="pt-20">
+        <main className="pt-16 md:pt-24 px-4 md:px-6 mx-auto max-w-7xl">
           <ServiceProvider>{children}</ServiceProvider>
         </main>
         <Footer />

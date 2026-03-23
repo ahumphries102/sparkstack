@@ -1,29 +1,33 @@
 "use client"
 import { AddOn } from "@/interfaces/services"
-import { Package } from "@/app/data/pricingData"
-import { FeatureCard } from "@/interfaces/services"
-import { createContext, useContext, useState, ReactNode } from "react"
+import { FeatureCard, Package } from "@/interfaces/services"
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+} from "react"
 
 // 1. Define your 4 specific outcomes
 type ServiceType = keyof FeatureCard
 
 interface ServiceContextType {
   selectedAddOns: AddOn[]
-  selectedPackage: Package
+  selectedPackage: any
   selectedService: ServiceType
   setSelectedAddOns: React.Dispatch<React.SetStateAction<AddOn[]>>
-  setSelectedPackage: (Package: Package) => void
+  setSelectedPackage: (Package: any) => any
   setSelectedService: (service: ServiceType) => void
 }
-
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined)
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
   const [selectedService, setSelectedService] =
-    useState<ServiceType>("frontend")
-  const [selectedPackage, setSelectedPackage] = useState({})
+  useState<ServiceType>("frontend")
+  const [selectedPackage, setSelectedPackage] = useState(
+  {},
+  )
   const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([])
-
   return (
     <ServiceContext.Provider
       value={{
