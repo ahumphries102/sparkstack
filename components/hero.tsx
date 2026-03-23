@@ -11,7 +11,6 @@ export default function hero({}) {
             maskImage: "url(/spark_stack_logo1.svg)",
             maskRepeat: "no-repeat",
             maskPosition: "center",
-
           }}
         />
         <span className="invisible">Spark Stack</span>
@@ -36,18 +35,10 @@ export default function hero({}) {
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 bg-zinc-800 border border-zinc-700 rounded-lg font-semibold
-                          hover:bg-zinc-700 transition-all"
+            className="px-8 py-4 bg-zinc-800 border border-zinc-700 rounded-lg font-semibold hover:bg-zinc-700 transition-all"
           >
             Get in Touch
           </a>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-zinc-700 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>

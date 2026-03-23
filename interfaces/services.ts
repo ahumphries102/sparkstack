@@ -39,6 +39,18 @@ type FeatureCard = {
   fullstack: Feature
   webDev: Feature
 }
+
+type FinalQuote = {
+  clientName: string
+  clientPhone: string
+  clientEmail: string
+  service: string
+  package: Package
+  addOns: AddOn[]
+  total: number
+  submittedAt: string
+}
+
 type FooterPricing = {
   color: string
   title: string
@@ -126,4 +138,11 @@ type TimelineItems = {
   description: string
 }
 
-export { type AddOn, type FeatureCard, type Package, type ServicePricingData, type Tabs }
+export {
+  type AddOn,
+  type FeatureCard,
+  type FinalQuote,
+  type Package,
+  type ServicePricingData,
+  type Tabs,
+}
