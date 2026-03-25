@@ -14,7 +14,9 @@ export default function Pricing() {
     setSelectedPackage,
   } = useService()
 
-  const togglePackages = (clickedPackage: Partial<Package>): Partial<Package> => {
+  const togglePackages = (
+    clickedPackage: Partial<Package>,
+  ): Partial<Package> => {
     // 1. Compare the name of what was clicked to what is already in state
     const isAlreadySelected = selectedPackage.name === clickedPackage.name
 

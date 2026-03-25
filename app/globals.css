@@ -1,17 +1,35 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@layer components {
-  .darkBg {
-    & p {
-      @apply text-zinc-300;
-    }
+/* 1. Move Keyframes to the top level */
+@keyframes glow-breathe {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@layer components {
+  /* 2. Your custom component logic */
+  .darkBg p {
+    @apply text-zinc-300;
+  }
+
   p {
     @apply text-zinc-900;
   }
+
   .logo-mask {
     font-family: var(--font-staatliches), sans-serif;
     @apply bg-gradient-to-r from-[#17CED5] from-[25%] to-white to-[25%];
+  }
+
+  /* 3. The Animation Class */
+  .glowBreathe {
+    /* Adding !important ensures it wins against DaisyUI or Tailwind utilities */
+    animation: glow-breathe 3s ease-in-out infinite;
+    display: block; /* Ensure it's not 'inline' */
   }
 }

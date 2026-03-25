@@ -1,7 +1,7 @@
 "use client"
 import { useService } from "@/app/data/serviceContext"
-import Services from "@/service_components/service"
-import ServiceSelection from "@/components/serviceSelection"
+import Services from "@/service_components/services"
+import ServiceSelection from "@/service_components/serviceSelection"
 export default function ServicePage() {
   const { selectedService, selectedTab } = useService()
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { featureCards, tabs } from "@/app/data/serviceData"
-import { AddOn, Tabs } from "@/interfaces/services"
+import { AddOn } from "@/interfaces/services"
 import { Trash } from "lucide-react"
 import { useService } from "@/app/data/serviceContext"
 import { sendQuote } from "@/components/emailServer"
@@ -56,6 +56,9 @@ export default function ServiceSelection({}) {
       }),
     }
     await sendQuote(finalQuote)
+    setEmail("")
+    setName("")
+    setPhone("")
   }
 
   const removeAddOn = (addOnToRemove: AddOn) => {
@@ -70,7 +73,7 @@ export default function ServiceSelection({}) {
     }
   }
   return (
-    <div className="h-[100%] sticky top-45 flex justify-end">
+    <div className="h-[100%] sticky top-70 flex justify-end">
       <div className="flex-col">
         <div className="flex flex-col gap-4 mb-12 overflow-x-auto pb-2">
           <div className="flex gap-4 p-1">
@@ -108,15 +111,21 @@ export default function ServiceSelection({}) {
             {/* Pricing */}
             {selectedTab === "pricing" && (
               <div
-                className={`card card-sm ${featureCards[selectedService].theme.gradient} rounded-2xl font-semibold`}
+                className={`card card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""}`}
               >
                 <div className="card-body text-zinc-900">
                   <h1 className="card-title">Your Projected Total</h1>
-                  <>
-                    {(selectedAddOns.length > 0 || selectedPackage?.name) && (
-                      <>
-                        <hr className="my-2" />
-
+                <hr className="my-2" />
+                  {(selectedAddOns.length > 0 || selectedPackage?.name) && (
+                    <>
+                      <div
+                        style={{
+                          overflowY: "scroll",
+                          textOverflow: "ellipsis",
+                          height: "105px",
+                        }}
+                      >
+                        
                         {Object.keys(selectedPackage).length > 0 && (
                           <ul>
                             <li className="flex items-center gap-2 justify-between">
@@ -142,11 +151,10 @@ export default function ServiceSelection({}) {
                             </li>
                           </ul>
                         ))}
-
-                        <h1 className="text-2xl">Total: ${totalAddOns()}</h1>
-                      </>
-                    )}
-                  </>
+                      </div>
+                      <h1 className="text-2xl">Total: ${totalAddOns()}</h1>
+                    </>
+                  )}
                   <legend className="fieldset-legend">
                     What is your email address?*
                   </legend>
@@ -180,7 +188,7 @@ export default function ServiceSelection({}) {
                   <button
                     type="submit" // Trigger the form's onSubmit
                     disabled={selectedAddOns.length <= 0 || !email} // Bonus: disable if empty
-                    className="btn ..."
+                    className="btn"
                   >
                     Submit Quote
                   </button>

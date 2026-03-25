@@ -11,13 +11,10 @@ export default function Services({
 }) {
   const serviceConfig = featureCards[selectedService as keyof FeatureCard]
   return (
-    // FIX 1: Reduced py-20 to py-10 on mobile, px-6 to px-4 for tighter screens
     <div className="min-h-screen bg-zinc-950 text-zinc-100 py-10 md:py-20 px-4 md:px-6">
-      {/* FIX 2: REMOVED min-w-7xl (This was causing the horizontal scroll) */}
       <div className="max-w-7xl mx-auto w-full">
         {/* Hero Section */}
         <div className="mb-10 md:mb-16">
-          {/* FIX 3: Flex-col on mobile, row on desktop to prevent icon/text overlap */}
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-6">
             <div
               className={`w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl flex-shrink-0 flex items-center justify-center`}
@@ -25,7 +22,6 @@ export default function Services({
               <serviceConfig.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
             </div>
             <div>
-              {/* FIX 4: Responsive text sizes (text-3xl -> text-5xl) */}
               <h1
                 className="text-3xl md:text-5xl font-black mb-2 leading-tight"
                 style={{ fontFamily: '"Space Grotesk", sans-serif' }}
