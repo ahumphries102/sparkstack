@@ -1,12 +1,7 @@
 "use client"
-import { AddOn } from "@/interfaces/services"
+import { AddOn, Tabs } from "@/interfaces/services"
 import { FeatureCard, Package } from "@/interfaces/services"
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-} from "react"
+import { createContext, useContext, useState, ReactNode } from "react"
 
 // 1. Define your 4 specific outcomes
 type ServiceType = keyof FeatureCard
@@ -15,28 +10,31 @@ interface ServiceContextType {
   selectedAddOns: AddOn[]
   selectedPackage: any
   selectedService: ServiceType
+  selectedTab: string
   setSelectedAddOns: React.Dispatch<React.SetStateAction<AddOn[]>>
   setSelectedPackage: (Package: any) => any
   setSelectedService: (service: ServiceType) => void
+  setSelectedTab: (tab: string) => void
 }
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined)
 
 export function ServiceProvider({ children }: { children: ReactNode }) {
   const [selectedService, setSelectedService] =
-  useState<ServiceType>("frontend")
-  const [selectedPackage, setSelectedPackage] = useState(
-  {},
-  )
+    useState<ServiceType>("frontend")
+  const [selectedPackage, setSelectedPackage] = useState({})
   const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([])
+  const [selectedTab, setSelectedTab] = useState<Tabs["id"]>("overview")
   return (
     <ServiceContext.Provider
       value={{
-        selectedService,
-        setSelectedService,
         selectedAddOns,
         setSelectedAddOns,
         selectedPackage,
         setSelectedPackage,
+        selectedService,
+        setSelectedService,
+        selectedTab,
+        setSelectedTab,
       }}
     >
       {children}
