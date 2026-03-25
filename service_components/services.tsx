@@ -3,24 +3,18 @@ import { FeatureCard } from "@/interfaces/services"
 import Pricing from "@/service_components/pricing"
 
 export default function Services({
-  activeTab,
+  selectedTab,
   selectedService,
 }: {
-  activeTab: string
+  selectedTab: string
   selectedService: keyof FeatureCard
 }) {
   const serviceConfig = featureCards[selectedService as keyof FeatureCard]
-
   return (
-    // FIX 1: Reduced py-20 to py-10 on mobile, px-6 to px-4 for tighter screens
     <div className="min-h-screen bg-zinc-950 text-zinc-100 py-10 md:py-20 px-4 md:px-6">
-      
-      {/* FIX 2: REMOVED min-w-7xl (This was causing the horizontal scroll) */}
       <div className="max-w-7xl mx-auto w-full">
-        
         {/* Hero Section */}
         <div className="mb-10 md:mb-16">
-          {/* FIX 3: Flex-col on mobile, row on desktop to prevent icon/text overlap */}
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-6">
             <div
               className={`w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-2xl flex-shrink-0 flex items-center justify-center`}
@@ -28,7 +22,6 @@ export default function Services({
               <serviceConfig.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
             </div>
             <div>
-              {/* FIX 4: Responsive text sizes (text-3xl -> text-5xl) */}
               <h1
                 className="text-3xl md:text-5xl font-black mb-2 leading-tight"
                 style={{ fontFamily: '"Space Grotesk", sans-serif' }}
@@ -43,7 +36,7 @@ export default function Services({
         </div>
 
         {/* Overview Tab */}
-        {activeTab === "overview" && (
+        {selectedTab === "overview" && (
           <div className="space-y-6 md:space-y-8">
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 md:p-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
@@ -51,7 +44,9 @@ export default function Services({
               </h2>
               <div className="space-y-4 text-base md:text-lg leading-relaxed text-zinc-300">
                 {serviceConfig.overview.paragraphs.map((para, idx) => (
-                  <p key={idx}>{para}</p>
+                  <p key={idx} className="text-zinc-300">
+                    {para}
+                  </p>
                 ))}
               </div>
             </div>
@@ -64,11 +59,17 @@ export default function Services({
                     key={index}
                     className={`bg-zinc-900/80 border ${serviceConfig.theme.pillBorder} rounded-2xl p-6`}
                   >
-                    <div className={`w-12 h-12 ${serviceConfig.theme.iconBg} rounded-xl flex items-center justify-center mb-4`}>
-                      <Icon className={`w-6 h-6 ${serviceConfig.theme.textPrimary}`} />
+                    <div
+                      className={`w-12 h-12 ${serviceConfig.theme.iconBg} rounded-xl flex items-center justify-center mb-4`}
+                    >
+                      <Icon
+                        className={`w-6 h-6 ${serviceConfig.theme.textPrimary}`}
+                      />
                     </div>
                     <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                    <p className="text-zinc-400 text-sm md:text-base">{feature.description}</p>
+                    <p className="text-zinc-400 text-sm md:text-base">
+                      {feature.description}
+                    </p>
                   </div>
                 )
               })}
@@ -77,21 +78,30 @@ export default function Services({
         )}
 
         {/* Process Tab */}
-        {activeTab === "process" && (
+        {selectedTab === "process" && (
           <div className="space-y-6 md:space-y-8">
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 md:p-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">Development Process</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-8">
+                Development Process
+              </h2>
               <div className="space-y-10 md:space-y-12">
                 {serviceConfig.processSteps.map((step, index) => (
                   // FIX 5: Stack number on top of text for narrow mobile screens
-                  <div key={index} className="flex flex-col sm:flex-row gap-4 md:gap-6">
+                  <div
+                    key={index}
+                    className="flex flex-col sm:flex-row gap-4 md:gap-6"
+                  >
                     <div className="flex-shrink-0">
-                      <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-xl md:rounded-2xl flex items-center justify-center text-xl md:text-2xl font-black`}>
+                      <div
+                        className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${serviceConfig.theme.gradient} rounded-xl md:rounded-2xl flex items-center justify-center text-xl md:text-2xl font-black`}
+                      >
                         {step.number}
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl md:text-2xl font-bold mb-2">{step.title}</h3>
+                      <h3 className="text-xl md:text-2xl font-bold mb-2">
+                        {step.title}
+                      </h3>
                       <p className="text-zinc-400 mb-4 text-sm md:text-base leading-relaxed">
                         {step.description}
                       </p>
@@ -112,11 +122,37 @@ export default function Services({
             </div>
           </div>
         )}
+        {/* Technologies Tab */}
+        {selectedTab === "technologies" && (
+          <div className="space-y-8">
+            <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8">
+              <h2 className="text-3xl font-bold mb-8">Technology Stack</h2>
+
+              {serviceConfig.technologyCategories.map((category, index) => (
+                <div key={index} className="mb-12 last:mb-0">
+                  <h3 className={`text-xl font-bold mb-4 ${category.color}`}>
+                    {category.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {category.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Pricing Tab */}
-        {activeTab === "pricing" && (
+        {selectedTab === "pricing" && (
           <div className="w-full overflow-hidden">
-             <Pricing />
+            <Pricing />
           </div>
         )}
       </div>
