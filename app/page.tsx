@@ -4,10 +4,10 @@ import About from "@/components/about"
 import Services from "@/components/heroServices"
 import Contact from "@/components/contact"
 
-
 export default function SparkStack() {
   return (
-    <div className="min-h-screen">
+    // Changed min-h-screen to min-h-[100dvh]
+    <div className="min-h-[100dvh]">
       <Hero />
       <About />
       <Services />

@@ -6,8 +6,7 @@ export async function sendQuote(formData: any) {
     .map((addOn: AddOn) => `<li>${addOn.name + " $" + addOn.price}</li>`)
     .join("")
   const emailContent = `<p>A new lead,${formData.clientName}, ${formData.clientPhone}, ${formData.clientEmail}, wants a <strong>${formData.service + " " + formData.package?.name + "package at $" + formData.package?.price}</strong> application. With these Add Ons</p> <ul>${addOns}</ul>
-    <p>Priced at ${formData.total}.</p>
-    <p>Submitted At: ${formData.submittedAt}</p>`
+    <p>Priced at ${formData.total}.</p>`
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",

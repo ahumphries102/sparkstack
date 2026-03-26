@@ -2,7 +2,7 @@ export default function hero({}) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6"
+      className="relative min-h-[100dvh] flex items-center justify-center px-4 sm:px-6"
     >
       <div className="text-center w-full">
         <div
