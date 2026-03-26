@@ -1,5 +1,5 @@
 "use server"
-import { AddOn, FinalQuote } from "@/interfaces/services"
+import { AddOn } from "@/interfaces/services"
 
 export async function sendQuote(formData: any) {
   const addOns = formData.addOns
@@ -13,12 +13,32 @@ export async function sendQuote(formData: any) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer re_DpcWzhq8_5JUaxfkfX5aejb8xoo6cAG5K`,
+      Authorization: `Bearer ${process.env.EMAIL_KEY}`,
     },
     body: JSON.stringify({
       from: "Spark Stack <onboarding@resend.dev>",
       to: "ahumphries102@gmail.com",
       subject: `New Quote Request`,
+      html: emailContent,
+    }),
+  })
+
+  return res.ok
+}
+
+export async function contact(formData: any) {
+  const emailContent = `<p>From ${formData.email} <br/> ${formData.message}</p>`
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.EMAIL_KEY}`,
+    },
+    body: JSON.stringify({
+      from: "Spark Stack <onboarding@resend.dev>",
+      to: "ahumphries102@gmail.com",
+      subject: `Spark Stack: Question from`,
       html: emailContent,
     }),
   })

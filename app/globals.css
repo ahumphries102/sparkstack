@@ -32,4 +32,8 @@
     animation: glow-breathe 3s ease-in-out infinite;
     display: block; /* Ensure it's not 'inline' */
   }
+
+  .stickyComponents {
+    @apply h-[100%] sticky top-25;
+  }
 }

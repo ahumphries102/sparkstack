@@ -27,7 +27,7 @@ import {
 import { FeatureCard, ServicePricingData } from "@/interfaces/services"
 import { AddOn, Tabs } from "@/interfaces/services"
 
-export const categoryLabels: Record<AddOn["category"], string> = {
+const categoryLabels: Record<AddOn["category"], string> = {
   performance: "Performance Enhancements",
   features: "Additional Features",
   design: "Design Upgrades",
@@ -36,7 +36,7 @@ export const categoryLabels: Record<AddOn["category"], string> = {
   integration: "Third-Party Integrations",
   content: "Content & Design Services",
 }
-export const featureCards: FeatureCard = {
+const featureCards: FeatureCard = {
   frontend: {
     addOns: [
       // Performance
@@ -1854,7 +1854,7 @@ export const featureCards: FeatureCard = {
     ],
   },
 }
-export const serviceData = [
+const serviceData = [
   {
     color: "from-cyan-400 to-blue-500",
     description: "Beautiful, responsive interfaces that users love",
@@ -1918,7 +1918,7 @@ export const serviceData = [
     color: "from-amber-400 to-orange-500",
   },
 ]
-export const pricingData: Record<string, ServicePricingData> = {
+const pricingData: Record<string, ServicePricingData> = {
   frontend: {
     serviceId: "frontend",
     serviceName: "Front-End Development",
@@ -2586,9 +2586,18 @@ export const pricingData: Record<string, ServicePricingData> = {
     ],
   },
 }
-export const tabs: Array<Tabs> = [
+const tabs: Array<Tabs> = [
   { id: "overview", label: "Overview" },
   { id: "process", label: "Process" },
   { id: "technologies", label: "Technologies" },
   { id: "pricing", label: "Pricing" },
 ]
+
+export {
+  categoryLabels,
+  featureCards,
+  pricingData,
+  serviceData,
+  tabs,
+
+}
