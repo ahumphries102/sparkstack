@@ -140,6 +140,7 @@ type TimelineItems = {
 
 export {
   type AddOn,
+  type Feature,
   type FeatureCard,
   type FinalQuote,
   type Package,

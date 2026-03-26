@@ -1,10 +1,11 @@
 import { ServiceProvider } from "@/app/data/serviceContext"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Staatliches } from "next/font/google"
-
 import "./globals.css"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${staatliches.variable} antialiased bg-zinc-950 text-zinc-100 overflow-x-hidden`}
       >
         <Nav />
-        <main className="pt-16 md:pt-24 px-4 md:px-6 mx-auto max-w-7xl">
+        <main className="">
           <ServiceProvider>{children}</ServiceProvider>
         </main>
         <Footer />

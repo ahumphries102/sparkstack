@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { AddOn, Package } from "@/interfaces/services"
 import { Check, Sparkles } from "lucide-react"
-import { featureCards } from "@/app/data/serviceData"
+import { categoryLabels, featureCards } from "@/app/data/serviceData"
 import { useService } from "@/app/data/serviceContext"
 
 export default function Pricing() {
@@ -43,19 +43,13 @@ export default function Pricing() {
     )
   }
 
-  const categoryLabels: Record<AddOn["category"], string> = {
-    performance: "Performance Enhancements",
-    features: "Additional Features",
-    design: "Design Upgrades",
-    testing: "Quality Assurance",
-  }
   const bgGradient = featureCards[selectedService].theme.gradient
   const bgTheme = featureCards[selectedService].theme.bgPrimary
   const textTheme = featureCards[selectedService].theme.textPrimary
   const pillBg = featureCards[selectedService].theme.pillBg
   const pillBorder = featureCards[selectedService].theme.pillBorder
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="max-w-7xl mx-auto">
         {/* Base Packages */}
         <div className="mb-16">
@@ -112,10 +106,6 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-
-                <button
-                  className={`w-full py-3 rounded-xl font-semibold transition-all`}
-                ></button>
               </div>
             ))}
           </div>
@@ -130,10 +120,9 @@ export default function Pricing() {
           {(Object.keys(categoryLabels) as Array<AddOn["category"]>).map(
             (category) => {
               const categoryAddOns = getAddOnsByCategory(category)
-
               return (
                 <div key={category} className="mb-8">
-                  <h3 className={`text-xl font-bold mb-4  ${textTheme}`}>
+                  <h3 className={`${categoryAddOns.length <= 0 ? "hidden" : ""} text-xl font-bold mb-4  ${textTheme}`}>
                     {categoryLabels[category]}
                   </h3>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,6 +1,28 @@
-import {Mail, Github } from "lucide-react"
+import { Mail } from "lucide-react"
+import { contact } from "@/components/emailServer"
+import { useState } from "react"
 
 export default function Contact({}) {
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+
+  const handleContact = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const finalQuote = {
+      email: email,
+      message: message,
+      submittedAt: new Date().toLocaleString("en-US", {
+        hour12: true,
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
+    }
+    await contact(finalQuote)
+  }
   return (
     <section id="contact" className="relative py-32 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -25,27 +47,43 @@ export default function Contact({}) {
           life with cutting-edge technology and creative excellence.
         </p>
 
-        <div className="flex flex-wrap gap-4 justify-center">
-          <a
-            href="mailto:ahumphries102@gmail.com"
-            className="group px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg font-semibold
-                          hover:shadow-lg hover:shadow-pink-500/50 transition-all transform hover:scale-105
-                          flex items-center gap-2"
-          >
-            <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-            ahumphries102@gmail.com
-          </a>
-          <a
-            href="https://github.com/ahumphries102"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 bg-zinc-800 border border-zinc-700 rounded-lg font-semibold
-                          hover:bg-zinc-700 transition-all flex items-center gap-2"
-          >
-            <Github className="w-5 h-5" />
-            View Portfolio
-          </a>
-        </div>
+        <form
+          onSubmit={handleContact}
+          className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto"
+        >
+          <fieldset className="card-body">
+            <label className="label">Email</label>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              className="input validator"
+              placeholder="Email"
+              required
+            />
+            <label className="label">Message</label>
+            <label className="fieldset">
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="textarea validator"
+                minLength={10}
+                placeholder="Your message here..."
+                rows={4}
+                required
+              />
+            </label>
+            <button
+              type="submit"
+              className={`group px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg font-semibold
+              hover:shadow-lg hover:shadow-pink-500/50 transition-all transform hover:scale-105
+              flex items-center gap-2`}
+            >
+              <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              ahumphries102@gmail.com
+            </button>
+          </fieldset>
+        </form>
 
         {/* Contact Info */}
         <div className="mt-16 grid md:grid-cols-3 gap-8">
