@@ -49,7 +49,7 @@ export default function Pricing() {
   const pillBg = featureCards[selectedService].theme.pillBg
   const pillBorder = featureCards[selectedService].theme.pillBorder
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-[100dvh] bg-zinc-950 text-zinc-100">
       <div className="max-w-7xl mx-auto">
         {/* Base Packages */}
         <div className="mb-16">

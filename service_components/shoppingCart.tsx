@@ -17,8 +17,10 @@ export default function ShoppingCart({}) {
     setSelectedPackage,
     selectedService,
   } = useService()
+
   const deleteClass =
     "w-4 h-4 cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
+
   const totalAddOns = () => {
     const addOnsTotal = selectedAddOns.reduce(
       (total, addon) => total + addon.price,
@@ -45,6 +47,8 @@ export default function ShoppingCart({}) {
     setEmail("")
     setName("")
     setPhone("")
+    setSelectedAddOns([])
+    setSelectedPackage({})
   }
 
   const removeAddOn = (addOnToRemove: AddOn) => {
@@ -64,7 +68,7 @@ export default function ShoppingCart({}) {
         {/* Pricing */}
 
         <div
-          className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-[50%]`}
+          className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-full sm:w-[90%] lg:w-[50%]`}
         >
           <div className="card-body text-zinc-900">
             <h1 className="card-title">

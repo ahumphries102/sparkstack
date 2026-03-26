@@ -15,12 +15,17 @@ export default function Services({
   selectedService: keyof FeatureCard
 }) {
   const serviceConfig = featureCards[selectedService]
-  console.log(serviceConfig)
   return (
-    <div className="min-h-screen text-zinc-100 py-10 md:py-20 px-4 md:px-6 flex relative">
-      <span className="flex-1" />
+    // 1. Changed to flex-col for mobile, lg:flex-row for desktop
+    <div className="min-h-[100dvh] text-zinc-100 py-10 md:py-20 px-4 md:px-6 flex flex-col lg:flex-row relative">
+      
+      {/* 2. Hidden on mobile, flex-1 on desktop to keep centering */}
+      <span className="hidden lg:block lg:flex-1" />
+      
       {/* Main Content */}
-      <div className="max-w-7xl flex-2">
+      {/* 3. Added w-full for mobile, changed flex-2 to lg:flex-[2] */}
+      <div className="w-full max-w-7xl lg:flex-[2]">
+        
         {/* Hero Section */}
         <div className="mb-10 md:mb-16">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-6">
@@ -69,7 +74,9 @@ export default function Services({
           )}
         </>
       </div>
-      <div className="flex-1">
+      
+      {/* 4. Added w-full for mobile, lg:flex-1 for desktop, and margin top for mobile spacing */}
+      <div className="w-full mt-12 lg:mt-0 lg:flex-1">
         {/* Shopping Cart */}
         {selectedTab === "pricing" && <ShoppingCart />}
       </div>
