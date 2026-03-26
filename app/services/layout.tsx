@@ -4,8 +4,8 @@ export default function layout({
   children: React.ReactNode
 }>) {
   return (
-    <section className="p-5">
+    <>
       {children}
-    </section>
+    </>
   )
 }

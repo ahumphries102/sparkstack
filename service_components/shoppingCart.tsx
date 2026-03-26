@@ -68,7 +68,8 @@ export default function ShoppingCart({}) {
         {/* Pricing */}
 
         <div
-          className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-full sm:w-[90%] lg:w-[50%]`}
+          // Changed the width classes at the very end to just w-full
+          className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-full`}
         >
           <div className="card-body text-zinc-900">
             <h1 className="card-title">
