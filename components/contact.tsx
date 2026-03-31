@@ -1,4 +1,3 @@
-import { Mail } from "lucide-react"
 import { contact } from "@/components/emailServer"
 import { useState } from "react"
 
@@ -24,7 +23,7 @@ export default function Contact({}) {
     await contact(finalQuote)
   }
   return (
-    <section id="contact" className="relative py-32 px-6">
+    <section id="contact" className="relative py-32 sm:px-2 md:px-0">
       <div className="max-w-4xl mx-auto text-center">
         <div className="inline-block px-4 py-2 bg-zinc-800/50 rounded-full border border-zinc-700 mb-6">
           <span className="text-sm text-pink-400 font-semibold">
@@ -75,12 +74,11 @@ export default function Contact({}) {
             </label>
             <button
               type="submit"
-              className={`group px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg font-semibold
+              className="group px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg font-semibold
               hover:shadow-lg hover:shadow-pink-500/50 transition-all transform hover:scale-105
-              flex items-center gap-2`}
+              "
             >
-              <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              ahumphries102@gmail.com
+              Submit
             </button>
           </fieldset>
         </form>
