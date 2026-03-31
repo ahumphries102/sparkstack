@@ -4,7 +4,7 @@ import Services from "@/service_components/services"
 export default function ServicePage() {
   const { selectedService, selectedTab } = useService()
   return (
-    <div className="pt-20">
+    <div>
       <Services selectedService={selectedService} selectedTab={selectedTab} />
     </div>
   )

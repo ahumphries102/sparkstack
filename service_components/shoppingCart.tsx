@@ -5,11 +5,14 @@ import { featureCards } from "@/app/data/serviceData"
 import { AddOn } from "@/interfaces/services"
 import { useService } from "@/app/data/serviceContext"
 import { sendQuote } from "@/components/emailServer"
+import SubmitSuccess from "@/service_components/submitSuccess"
 
 export default function ShoppingCart({}) {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const {
     selectedAddOns,
     setSelectedAddOns,
@@ -43,12 +46,20 @@ export default function ShoppingCart({}) {
       addOns: selectedAddOns.map((a) => ({ name: a.name, price: a.price })),
       total: totalAddOns(),
     }
-    await sendQuote(finalQuote)
-    setEmail("")
-    setName("")
-    setPhone("")
-    setSelectedAddOns([])
-    setSelectedPackage({})
+    setIsSubmitting(true)
+    const results = await sendQuote(finalQuote)
+
+    setIsSubmitting(false)
+    if (results) {
+      setShowSuccess(true)
+      setSelectedAddOns([])
+      setSelectedPackage({})
+      setEmail("")
+      setName("")
+      setPhone("")
+    } else {
+      setShowSuccess(false)
+    }
   }
 
   const removeAddOn = (addOnToRemove: AddOn) => {
@@ -63,89 +74,114 @@ export default function ShoppingCart({}) {
     }
   }
   return (
-    <form onSubmit={handleQuoteSubmit} className="card sticky top-25 fieldset">
-      <fieldset className="fieldset card-body">
-        {/* Pricing */}
+    <>
+      <form
+        onSubmit={handleQuoteSubmit}
+        className="card sticky top-25 fieldset lg:w-100 md:w-1/2 sm:w-3/4"
+      >
+        <fieldset className="fieldset card-body">
+          {/* Pricing */}
 
-        <div
-          className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-full sm:w-[90%] lg:w-[50%]`}
-        >
-          <div className="card-body text-zinc-900">
-            <h1 className="card-title">
-              Select a Package or Add-On and enter your contact information to
-              receive a quote.
-            </h1>
-            <hr className="my-2" />
-            {(selectedAddOns.length > 0 || selectedPackage?.name) && (
-              <>
-                {Object.keys(selectedPackage).length > 0 && (
-                  <ul>
-                    <li className="flex items-center gap-2 justify-between">
-                      Package: {selectedPackage.name} ${selectedPackage.price}
-                      <Trash
-                        className={deleteClass}
-                        onClick={() => removePackage(selectedPackage.name)}
-                      />
-                    </li>
-                  </ul>
+          <div
+            // Changed the width classes at the very end to just w-full
+            className={`card mx-auto card-sm ${featureCards[selectedService].theme.gradient} ${selectedAddOns.length > 0 || selectedPackage?.name ? "glowBreathe" : ""} w-full`}
+          >
+            {isSubmitting ? (
+              /* Loading State */
+              <div className="flex flex-col items-center justify-center p-10 space-y-4">
+                <span className="loading loading-ring loading-lg text-primary" />
+                <p className="font-semibold">Processing your quote...</p>
+              </div>
+            ) : (
+              /* Form State */
+              <div className="card-body text-zinc-900">
+                <h1 className="card-title">
+                  Select a Package or Add-On and enter your contact information
+                  to receive a quote.
+                </h1>
+                <hr className="my-2" />
+
+                {(selectedAddOns.length > 0 || selectedPackage?.name) && (
+                  <>
+                    {Object.keys(selectedPackage || {}).length > 0 && (
+                      <ul>
+                        <li className="flex items-center gap-2 justify-between text-base font-semibold">
+                          Package: {selectedPackage.name} $
+                          {selectedPackage.price}
+                          <Trash
+                            className={deleteClass}
+                            onClick={() => removePackage(selectedPackage.name)}
+                          />
+                        </li>
+                      </ul>
+                    )}
+                    {selectedAddOns.map((addOn: AddOn) => (
+                      <ul key={addOn.id}>
+                        <li className="flex items-center font-semibold text-base gap-2 justify-between">
+                          {addOn.name}: ${addOn.price}
+                          <Trash
+                            onClick={() => removeAddOn(addOn)}
+                            className={deleteClass}
+                          />
+                        </li>
+                      </ul>
+                    ))}
+                    <h1 className="text-2xl font-bold">
+                      Total: ${totalAddOns()}
+                    </h1>
+                  </>
                 )}
-                {selectedAddOns.map((addOn: AddOn) => (
-                  <ul key={addOn.id}>
-                    <li className="flex items-center gap-2 justify-between">
-                      {addOn.name}: ${addOn.price}
-                      <Trash
-                        onClick={() => removeAddOn(addOn)}
-                        className={deleteClass}
-                      />
-                    </li>
-                  </ul>
-                ))}
-                <h1 className="text-2xl">Total: ${totalAddOns()}</h1>
-              </>
+
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="input text-white validator"
+                  minLength={3}
+                  placeholder="Name"
+                  required
+                />
+                <input
+                  type="email"
+                  name="user_email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input text-white validator"
+                  minLength={3}
+                  placeholder="Email Address"
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="input text-white validator"
+                  minLength={3}
+                  placeholder="Phone Number"
+                  pattern="[0-9]{10}"
+                  required
+                />
+
+                <button
+                  type="submit"
+                  className={`${selectedAddOns.length > 0 || selectedPackage?.name ? "" : "btn-disabled"} btn mt-4`}
+                >
+                  Submit Quote
+                </button>
+              </div>
             )}
-            <legend className="fieldset-legend">
-              What is your email address?*
-            </legend>
-            <input
-              type="text"
-              name="name" // Added a name attribute
-              value={name} // Connect to state
-              onChange={(e) => setName(e.target.value)} // Update state on type
-              className="input text-white validator"
-              minLength={3}
-              placeholder="Name"
-              required
-            />
-            <input
-              type="email"
-              name="user_email" // Added a name attribute
-              value={email} // Connect to state
-              onChange={(e) => setEmail(e.target.value)} // Update state on type
-              className="input text-white validator"
-              minLength={3}
-              placeholder="Email Address"
-              required
-            />
-            <input
-              type="tel"
-              name="phone" // Added a name attribute
-              value={phone} // Connect to state
-              onChange={(e) => setPhone(e.target.value)} // Update state on type
-              className="input text-white validator"
-              minLength={3}
-              placeholder="Phone Number"
-              pattern="[0-9]{10}"
-              required
-            />
-            <button
-              type="submit" // Trigger the form's onSubmit
-              className="btn"
-            >
-              Submit Quote
-            </button>
           </div>
-        </div>
-      </fieldset>
-    </form>
+        </fieldset>
+      </form>
+      {/* Success Alert */}
+      {showSuccess && (
+        <SubmitSuccess
+          isOpen={showSuccess}
+          onClose={() => setShowSuccess(false)}
+        />
+      )}
+    </>
   )
 }

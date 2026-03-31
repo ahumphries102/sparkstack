@@ -192,8 +192,8 @@ const featureCards: FeatureCard = {
       },
     },
     hero: {
-      title: "Front-End Development",
-      subtitle: "Beautiful, responsive interfaces that users love",
+      title: "User Interface Development",
+      subtitle: "The interactive aspect of your site",
       // Note: You can map the actual Lucide component in your master file using this string or a component map
       icon: "Camera",
     },
@@ -708,7 +708,7 @@ const featureCards: FeatureCard = {
       },
     },
     hero: {
-      title: "Back-End Development",
+      title: "Database Development",
       subtitle: "Robust server-side solutions for your applications",
       icon: "Code",
     },
@@ -1075,7 +1075,7 @@ const featureCards: FeatureCard = {
       },
     },
     hero: {
-      title: "Full-Stack Development",
+      title: "User Interface + Database Development",
       subtitle: "Complete end-to-end web application development",
       icon: "Zap",
     },
@@ -1537,8 +1537,8 @@ const featureCards: FeatureCard = {
       },
     },
     hero: {
-      title: "Web Development",
-      subtitle: "Custom solutions for your unique business needs",
+      title: "Wordpress & CMS Development",
+      subtitle: "A simple, quick, and powerful solution for your online presence",
       icon: "Coffee",
     },
     icon: Coffee,
@@ -1870,10 +1870,10 @@ const serviceData = [
 
     path: "frontend" as keyof FeatureCard,
 
-    title: "Front-End",
+    title: "User Interface Development",
   },
   {
-    title: "Back-End",
+    title: "Database Development",
     path: "backend" as keyof FeatureCard,
     icon: <Code className="w-8 h-8" />,
     description: "Robust server-side solutions for your applications",
@@ -1888,7 +1888,7 @@ const serviceData = [
     color: "from-violet-400 to-purple-500",
   },
   {
-    title: "Full-Stack",
+    title: "UI + Database Development",
     path: "fullstack" as keyof FeatureCard,
     icon: <Zap className="w-8 h-8" />,
     description: "Complete end-to-end web application development",
@@ -1903,7 +1903,7 @@ const serviceData = [
     color: "from-pink-400 to-rose-500",
   },
   {
-    title: "Web Development",
+    title: "Wordpress & CMS Development",
     icon: <Coffee className="w-8 h-8" />,
     description: "Custom solutions for your unique business needs",
     features: [
