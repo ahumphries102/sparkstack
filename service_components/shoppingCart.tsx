@@ -21,6 +21,12 @@ export default function ShoppingCart({}) {
     selectedService,
   } = useService()
 
+  const disabledButton = () => {
+    if (isSubmitting) return true
+    if (selectedAddOns.length === 0 && Object.keys(selectedPackage).length === 0) return true
+    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") return true
+    return false
+  }
   const deleteClass =
     "w-4 h-4 cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
 
@@ -160,18 +166,18 @@ export default function ShoppingCart({}) {
                   className="input text-white validator"
                   minLength={3}
                   placeholder="Phone Number"
-                  pattern="[0-9]{10}"
+                  pattern="^(\d{10}|\(\d{3}\)\s?\d{3}-\d{4}|\d{3}-\d{3}-\d{4})$"
+                  maxLength={10}
                   required
                 />
 
-                <button
-                  type="submit"
-                  className={`${selectedAddOns.length > 0 || selectedPackage?.name ? "" : "btn-disabled"} btn mt-4`}
-                >
+                <button type="submit" className={`btn mt-4 disabled:bg-gray-500`} disabled={disabledButton()}>
                   Submit Quote
                 </button>
               </div>
             )}
+
+            {/* The visible Add-Ons list container */}
           </div>
         </fieldset>
       </form>

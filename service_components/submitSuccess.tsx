@@ -6,7 +6,7 @@ interface QuoteSuccessDialogProps {
   gradient?: string
 }
 
-export default function QuoteSuccessDialog({
+export default function SubmitSuccess({
   isOpen,
   onClose,
   gradient = "from-cyan-400 to-blue-500",
