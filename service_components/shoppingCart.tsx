@@ -21,10 +21,41 @@ export default function ShoppingCart({}) {
     selectedService,
   } = useService()
 
+  const formFields = [
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Name",
+      value: name,
+      setter: setName,
+    },
+    {
+      name: "user_email",
+      type: "email",
+      placeholder: "Email Address",
+      value: email,
+      setter: setEmail,
+    },
+    {
+      name: "phone",
+      type: "tel",
+      placeholder: "Phone Number",
+      value: phone,
+      setter: setPhone,
+      pattern: "^(\\d{10}|\\(\\d{3}\\)\\s?\\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4})$",
+      maxLength: 10,
+    },
+  ]
+
   const disabledButton = () => {
     if (isSubmitting) return true
-    if (selectedAddOns.length === 0 && Object.keys(selectedPackage).length === 0) return true
-    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") return true
+    if (
+      selectedAddOns.length === 0 &&
+      Object.keys(selectedPackage).length === 0
+    )
+      return true
+    if (name.trim() === "" || email.trim() === "" || phone.trim() === "")
+      return true
     return false
   }
   const deleteClass =
@@ -101,10 +132,10 @@ export default function ShoppingCart({}) {
             ) : (
               /* Form State */
               <div className="card-body text-zinc-900">
-                <h1 className="card-title">
+                <h3 className="card-title">
                   Select a Package or Add-On and enter your contact information
                   to receive a quote.
-                </h1>
+                </h3>
                 <hr className="my-2" />
 
                 {(selectedAddOns.length > 0 || selectedPackage?.name) && (
@@ -138,40 +169,25 @@ export default function ShoppingCart({}) {
                   </>
                 )}
 
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="input text-white validator"
-                  minLength={3}
-                  placeholder="Name"
-                  required
-                />
-                <input
-                  type="email"
-                  name="user_email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="input text-white validator"
-                  minLength={3}
-                  placeholder="Email Address"
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="input text-white validator"
-                  minLength={3}
-                  placeholder="Phone Number"
-                  pattern="^(\d{10}|\(\d{3}\)\s?\d{3}-\d{4}|\d{3}-\d{3}-\d{4})$"
-                  maxLength={10}
-                  required
-                />
+                {formFields.map((field) => (
+                  <input
+                    key={field.name}
+                    type={field.type}
+                    name={field.name}
+                    value={field.value}
+                    onChange={(e) => field.setter(e.target.value)}
+                    placeholder={field.placeholder}
+                    className="input text-white validator w-full"
+                    minLength={3}
+                    required
+                  />
+                ))}
 
-                <button type="submit" className={`btn mt-4 disabled:bg-gray-500`} disabled={disabledButton()}>
+                <button
+                  type="submit"
+                  className={`btn mt-4 disabled:bg-gray-500`}
+                  disabled={disabledButton()}
+                >
                   Submit Quote
                 </button>
               </div>

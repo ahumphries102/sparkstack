@@ -17,7 +17,7 @@ export default function Services({
   const serviceConfig = featureCards[selectedService]
   return (
     // 1. Changed to flex-col for mobile, lg:flex-row for desktop
-    <div className="min-h-[100dvh] text-zinc-100 py-10 md:py-20 px-4 md:px-6 flex flex-col lg:flex-row relative">
+    <section id="services" className="min-h-[100dvh] text-zinc-100 py-10 md:py-20 px-4 md:px-6 flex flex-col lg:flex-row relative">
       
       {/* 2. Hidden on mobile, flex-1 on desktop to keep centering */}
       <span className="hidden lg:block lg:flex-1" />
@@ -35,9 +35,9 @@ export default function Services({
               <serviceConfig.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl md:text-5xl font-black mb-2 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black mb-2 leading-tight">
                 {serviceConfig.hero.title}
-              </h1>
+              </h2>
               <p className="text-lg md:text-xl text-zinc-400">
                 {serviceConfig.hero.subtitle}
               </p>
@@ -80,6 +80,6 @@ export default function Services({
         {/* Shopping Cart */}
         {selectedTab === "pricing" && <ShoppingCart />}
       </div>
-    </div>
+    </section>
   )
 }
