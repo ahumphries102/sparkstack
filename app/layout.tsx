@@ -39,6 +39,7 @@ export default function RootLayout({
       >
         <main>
           <Nav />
+          
           <ServiceProvider>{children}</ServiceProvider>
         </main>
         <Footer />
