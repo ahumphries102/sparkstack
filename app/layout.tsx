@@ -1,7 +1,7 @@
 import { ServiceProvider } from "@/app/data/serviceContext"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Staatliches } from "next/font/google"
-import "./globals.css"
+import "@/app/globals.css"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
 

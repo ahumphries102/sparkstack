@@ -1,10 +1,11 @@
 import { contact } from "@/components/emailServer"
 import { useState } from "react"
+import SubmitSuccess from "@/service_components/submitSuccess"
 
 export default function Contact({}) {
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
-
+  const [showSuccess, setShowSuccess] = useState(false)
   const handleContact = async (e: React.FormEvent) => {
     e.preventDefault()
     const finalQuote = {
@@ -21,6 +22,9 @@ export default function Contact({}) {
       }),
     }
     await contact(finalQuote)
+    setEmail("")
+    setMessage("")
+    setShowSuccess(true)
   }
   return (
     <section id="contact" className="relative py-32 sm:px-2 md:px-0">
@@ -51,14 +55,16 @@ export default function Contact({}) {
           className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto"
         >
           <fieldset className="card-body">
-            <label className="label">Email</label>
+            <label htmlFor="contact-email" className="label">
+              Email
+            </label>
             <input
+              id="contact-email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               className="input validator"
               placeholder="Email"
-              required
             />
             <label className="label">Message</label>
             <label className="fieldset">
@@ -69,7 +75,6 @@ export default function Contact({}) {
                 minLength={10}
                 placeholder="Your message here..."
                 rows={4}
-                required
               />
             </label>
             <button
@@ -84,23 +89,50 @@ export default function Contact({}) {
         </form>
 
         {/* Contact Info */}
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
+        <dl className="mt-16 grid md:grid-cols-3 gap-8">
+          {/* Card 1: Response Time */}
           <div className="p-6 bg-zinc-900/50 border border-zinc-800 rounded-xl">
-            <div className="text-cyan-400 text-2xl mb-2">⚡</div>
-            <div className="text-sm text-zinc-500 mb-1">Response Time</div>
-            <div className="font-semibold">Within 24 hours</div>
+            <dt className="flex flex-col">
+              <span className="text-cyan-400 text-2xl mb-2" aria-hidden="true">
+                ⚡
+              </span>
+              <span className="text-sm text-zinc-500 mb-1">Response Time</span>
+            </dt>
+            <dd className="font-semibold">Within 24 hours</dd>
           </div>
+
+          {/* Card 2: Location */}
           <div className="p-6 bg-zinc-900/50 border border-zinc-800 rounded-xl">
-            <div className="text-violet-400 text-2xl mb-2">🌍</div>
-            <div className="text-sm text-zinc-500 mb-1">Location</div>
-            <div className="font-semibold">McMinnville, OR</div>
+            <dt className="flex flex-col">
+              <span
+                className="text-violet-400 text-2xl mb-2"
+                aria-hidden="true"
+              >
+                🌍
+              </span>
+              <span className="text-sm text-zinc-500 mb-1">Location</span>
+            </dt>
+            <dd className="font-semibold">McMinnville, OR</dd>
           </div>
+
+          {/* Card 3: Availability */}
           <div className="p-6 bg-zinc-900/50 border border-zinc-800 rounded-xl">
-            <div className="text-pink-400 text-2xl mb-2">💼</div>
-            <div className="text-sm text-zinc-500 mb-1">Availability</div>
-            <div className="font-semibold">Open for projects</div>
+            <dt className="flex flex-col">
+              <span className="text-pink-400 text-2xl mb-2" aria-hidden="true">
+                💼
+              </span>
+              <span className="text-sm text-zinc-500 mb-1">Availability</span>
+            </dt>
+            <dd className="font-semibold">Open for projects</dd>
           </div>
-        </div>
+        </dl>
+        {/* Success Alert */}
+        {showSuccess && (
+          <SubmitSuccess
+            isOpen={showSuccess}
+            onClose={() => setShowSuccess(false)}
+          />
+        )}
       </div>
     </section>
   )

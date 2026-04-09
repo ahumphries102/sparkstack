@@ -6,6 +6,8 @@ export default function hero({}) {
     >
       <div className="text-center w-full">
         <div
+          role="img"
+          aria-label="Spark Stack Logo"
           className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-80 lg:w-96 lg:h-96 mx-auto logo-mask"
           style={{
             maskImage: "url(/spark_stack_logo1.svg)",
@@ -13,7 +15,6 @@ export default function hero({}) {
             maskPosition: "center",
           }}
         />
-        <span className="invisible">Spark Stack</span>
         <h1
           className="text-3xl sm:text-4xl md:text-5xl font-black"
           style={{ fontFamily: '"Space Grotesk", sans-serif' }}
