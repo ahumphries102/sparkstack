@@ -65,7 +65,6 @@ export default function Contact({}) {
               type="email"
               className="input validator"
               placeholder="Email"
-              required
             />
             <label className="label">Message</label>
             <label className="fieldset">
@@ -76,7 +75,6 @@ export default function Contact({}) {
                 minLength={10}
                 placeholder="Your message here..."
                 rows={4}
-                required
               />
             </label>
             <button

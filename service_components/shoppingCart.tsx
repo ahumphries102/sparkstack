@@ -113,6 +113,7 @@ export default function ShoppingCart({}) {
   return (
     <>
       <form
+        noValidate
         onSubmit={handleQuoteSubmit}
         className="card sticky top-25 fieldset lg:w-100 md:w-1/2 sm:w-3/4"
       >
