@@ -5,8 +5,6 @@ import "@/app/globals.css"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
 
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,12 +33,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" data-theme="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${staatliches.variable} antialiased bg-zinc-950 text-zinc-100 overflow-x-hidden`}
       >
-        <Nav />
-        <main className="">
+        <main>
+          <Nav />
           <ServiceProvider>{children}</ServiceProvider>
         </main>
         <Footer />
