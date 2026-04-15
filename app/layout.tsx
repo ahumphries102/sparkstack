@@ -29,21 +29,88 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Spark Stack",
+    "url": "https://sparkstack.netlify.app",
+    "logo": "https://sparkstack.netlify.app/spark_stack_logo1.svg",
+    "image": "https://sparkstack.netlify.app/spark_stack_logo1.svg",
+    "description": "Premium web development agency specializing in high-performance frontend experiences, robust server-side solutions, and end-to-end full-stack applications.",
+    "founder": {
+      "@type": "Person",
+      "name": "Andrew Humphries"
+    },
+    "sameAs": [
+      "https://github.com/ahumphries102",
+      "https://linkedin.com/in/ahumphriesprofile"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "McMinnville",
+      "addressRegion": "OR",
+      "postalCode": "97128",
+      "addressCountry": "US"
+    },
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Spark Stack Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "User Interface Development",
+            "description": "Modern UI/UX design implementation using React, Vue, or Vanilla JavaScript."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Database Development",
+            "description": "Robust server-side solutions including RESTful API design and database architecture."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Full-Stack Web Development",
+            "description": "Complete end-to-end web application development from database to UI."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Wordpress & CMS Development",
+            "description": "Custom WordPress themes and plugins for unique business needs."
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <html lang="en" className="scroll-smooth" data-theme="dark">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${staatliches.variable} antialiased bg-zinc-950 text-zinc-100 overflow-x-hidden`}
-      >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${staatliches.variable} antialiased bg-zinc-950 text-zinc-100 overflow-x-hidden`}>
         <main>
           <Nav />
-          
           <ServiceProvider>{children}</ServiceProvider>
         </main>
         <Footer />
       </body>
     </html>
-  )
+  );
 }

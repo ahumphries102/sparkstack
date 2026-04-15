@@ -1,4 +1,4 @@
-import profile_picture from "@/public/images/unnamed.jpg"
+import profile_picture from "@/public/unnamed.jpg"
 import Image from "next/image"
 
 export default function about({}) {
